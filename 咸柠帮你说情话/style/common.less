@@ -20,3 +20,17 @@ img { border:0;}
     width:@x;
     height:@y;
 }
+
+.absolute-box(@x:100%, @y:100%, @top:0, @left:0) {
+    .percent-box(@x, @y);
+    position:absolute;
+    top:@top;
+    left:@left;
+}
+
+.relative-box(@x:100%, @y:100%, @top:0, @left:0) {
+    .percent-box(@x, @y);
+    position:relative;
+    top:@top;
+    left:@left;
+}
