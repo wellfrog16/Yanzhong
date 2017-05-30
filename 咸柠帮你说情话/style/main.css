@@ -127,6 +127,18 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 }
+.scene01 .two {
+  position: absolute;
+  width: 304px;
+  height: 203px;
+  top: 108px;
+  right: 60px;
+  background-image: url(../img/scene01/two.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform-origin: right top;
+  display: none;
+}
 .scene02 .xianqige {
   width: 199px;
   height: 289px;
@@ -334,7 +346,7 @@ body {
   text-align: center;
   display: none;
 }
-.scene04 .share .share {
+.scene04 .share .share-words {
   width: 266px;
   height: 217px;
   position: absolute;

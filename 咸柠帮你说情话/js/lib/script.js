@@ -136,9 +136,13 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
         s01 : {
             open: function () {
                 self.scene.s01.bindAciton();
+                setTimeout(function () {
+                    self.scene.s01.movie.play();
+                }, 1000);                
             },
 
             close: function () {
+                clearInterval(self.scene.s01.movie.timer[0]);
                 self.scene.s02.open();
             },
 
@@ -146,6 +150,25 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 $('.scene01 .button').hammer().on("tap", function (e) {
                     self.scene.s01.close();
                 });
+            },
+
+            movie: {
+                timer: [null],
+                play: function () {
+                    self.scene.s01.movie.two();
+                },
+                two: function () {
+                    $(".scene01 .two").show();
+                    self.scene.s01.movie.timer[0] = frameplayer({
+                        target: $(".scene01 .two"),
+                        total: 2,
+                        row: 1,
+                        loop: true,
+                        fps: 3,
+                        width: 304,
+                        height: 203
+                    });
+                }
             }
         },
 
@@ -349,7 +372,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         target: $(".scene04 .light"),
                         total: 7,
                         row: 3,
-                        loop: true,
+                        loop: false,
                         fps: 12,
                         width: 600,
                         height: 600
@@ -491,6 +514,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         <div class="button ani jsfix" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1.5s"></div>\
                         <div class="s4 ani jsfix" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="2.0s"></div>\
                         <div class="s5 ani jsfix" data-mode="top-right" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="2.2s"></div>\
+                        <div class="two jsfix" data-mode="top-right" data-movie="yes"></div>\
                     </div>\
                     <div class="swiper-slide scene02">\
                         <div class="xianqige jsfix" data-movie="yes"></div>\
@@ -517,7 +541,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         <div class="btn-share jsfix" data-mode="top-right"></div>\
                         <div class="share">\
                             <div class="light jsfix" data-mode="top-right" data-movie="yes"></div>\
-                            <div class="share jsfix"></div>\
+                            <div class="share-words jsfix"></div>\
                             <div class="two jsfix" data-movie="yes"></div>\
                         </div>\
                     </div>\
