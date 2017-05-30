@@ -67,13 +67,299 @@ body {
 .scene01 {
 
     .s1 {
+        .absolute-box(581px, 362px, 207px, 24px);
+        background-image:url(../img/scene01/info-bg.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .s2 {
+        .absolute-box(500px, 235px, 288px, 60px);
+        background-image:url(../img/scene01/info-words.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .button {
+        .absolute-box(426px, 129px, 728px, 99px);
+        background-image:url(../img/scene01/button-next.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .s4 {
+        .absolute-box(196px, 123px, 588px, 104px);
+        background-image:url(../img/scene01/bubble-dashan.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .s5 {
+        position:absolute;
+        width:213px;
+        height:124px;
+        top:588px;
+        right:95px;
+        background-image:url(../img/scene01/bubble-biaobai.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+}
+
+// ------------------------------------scene02-----------------------------------------
+.scene02 {
+    .xianqige {
+        .absolute-box(199px, 289px, 427px, 72px);
+        transform-origin: 0px 0px 0px;
+        background-image:url(../img/scene02/xianqige.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .mengxiaomei {
+        position:absolute;
+        width:156px;
+        height:234px;
+        top:485px;
+        right:102px;
+        background-image:url(../img/scene02/mengxiaomei.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+        transform-origin: right top;
+    }
+
+    .btn-xianqige {
+        .absolute-box(258px, 111px, 748px, 53px);
+        background-image:url(../img/scene02/button-boy.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .btn-mengxiaomei {
+        position:absolute;
+        width:265px;
+        height:111px;
+        top:748px;
+        right:45px;
+        background-image:url(../img/scene02/button-girl.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .s5 {
+        .absolute-box(544px, 366px, 125px, 48px);
+        background-image:url(../img/scene02/info-bg.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .s6 {
+        .absolute-box(444px, 159px, 179px, 96px);
+        background-image:url(../img/scene02/info-words.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+}
+
+.scene03 {
+    .xianqige {
+        .absolute-box(232px, 260px, 101px, 64px);
+        background-image:url(../img/scene03/xianqige.png);
+        background-repeat:no-repeat;
+        transform-origin: 0px 0px 0px;
+    }
+
+    .xianqige-words {
+        position:absolute;
+        width:301px;
+        height:134px;
+        top:184px;
+        right:59px;
+        background-image:url(../img/scene03/xianqige-words.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .mengxiaomei {
+        .absolute-box(202px, 234px, 117px, 80px);
+        background-image:url(../img/scene03/mengxiaomei.png);
+        background-repeat:no-repeat;
+        transform-origin: 0px 0px 0px;
+    }
+
+    .mengxiaomei-words {
+        position:absolute;
+        width:296px;
+        height:139px;
+        top:172px;
+        right:56px;
+        background-image:url(../img/scene03/mengxiaomei-words.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .s5 {
+        .absolute-box(534px, 229px, 382px, 50px);
+        background-image:url(../img/scene03/input-bg.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+        padding:10px;
+
+        input {
+            width:100%;
+            height:100%;
+            text-align:center;
+            border:none;
+            background:none;
+
+            //border:1px red solid;
+            outline:none;
+        }
+    }
+
+    .button {
+        .absolute-box(416px, 109px, 749px, 113px);
+        background-image:url(../img/scene03/button.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .mask {
+        .absolute-box();
+        z-index:1;
+        background-color:rgba(0, 0, 0, 0.8);
         text-align:center;
-        margin-top:20vh;
-        position:relative;
+        display:none;
 
         img {
-            width:90%;
+            margin-top:20vh;
+            width:80%;
         }
     }
 }
 
+.scene04 {
+
+    .audio {
+        .absolute-box(588px, 314px, 123px, 27px);
+        background-image:url(../img/scene04/audio.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .xianqige {
+        .absolute-box(364px, 327px, 381px, 143px);
+        background-image:url(../img/scene04/xianqige.png);
+        background-repeat:no-repeat;
+        transform-origin: 0px 0px 0px;
+    }
+
+    .mengxiaomei {
+        .absolute-box(244px, 222px, 415px, 200px);
+        background-image:url(../img/scene04/mengxiaomei.png);
+        background-repeat:no-repeat;
+        transform-origin: 0px 0px 0px;
+    }
+
+    .btn-retry {
+        .absolute-box(229px, 114px, 742px, 74px);
+        background-image:url(../img/scene04/button-retry.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .btn-share {
+        position:absolute;
+        width:229px;
+        height:114px;
+        top:742px;
+        right:74px;
+        background-image:url(../img/scene04/button-share.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .share {
+        .absolute-box();
+        z-index:1;
+        background-color:rgba(0, 0, 0, 0.8);
+        text-align:center;
+        display:none;
+
+        .share {
+            .absolute-box(266px, 217px, 83px, 68px);
+            background-image:url(../img/scene04/share.png);
+            background-repeat:no-repeat;
+            background-size:contain;
+        }
+
+        .two {
+            .absolute-box(428px, 303px, 180px, 108px);
+            background-image:url(../img/scene04/two.png);
+            background-repeat:no-repeat;
+            background-size:contain;
+            transform-origin:0;
+        }
+
+        .light {
+            position:absolute;
+            width:600px;
+            height:600px;
+            top:0px;
+            right:0px;
+            background-image:url(../img/scene04/light.png);
+            background-repeat:no-repeat;
+            transform-origin: right top;
+        }
+    }
+}
+
+.scene05 {
+    .s1 {
+        .absolute-box(593px, 440px, 45px, 28px);
+        background-image:url(../img/scene05/finished.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .xianqige {
+        .absolute-box(640px, 308px, 450px, 0px);
+        background-image:url(../img/scene05/walk.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+        transform-origin:0;
+        display:none;
+    }
+
+    .mengxiaomei {
+        position:absolute;
+        width:156px;
+        height:181px;
+        top:562px;
+        right:72px;
+        background-image:url(../img/scene05/mengxiaomei.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+}
+
+.scene06 {
+    >div {
+        text-align:center;
+    }
+
+    .s1 img {
+        margin-top:20vh;
+        width:35%;
+    }
+
+    .s2 img {
+        margin-top:5vh;
+        width:80%;
+    }
+
+    .s3 img {
+        margin-top:5vh;
+        width:40%;
+    }
+}
