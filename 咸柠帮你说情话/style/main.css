@@ -286,9 +286,15 @@ body > .audio {
   text-align: center;
   display: none;
 }
-.scene03 .mask img {
-  margin-top: 20vh;
-  width: 80%;
+.scene03 .mask .loading {
+  width: 244px;
+  height: 222px;
+  position: absolute;
+  top: 415px;
+  left: 200px;
+  background-image: url(../img/scene04/mengxiaomei.png);
+  background-repeat: no-repeat;
+  transform-origin: 0px 0px 0px;
 }
 .scene04 .audio {
   width: 588px;

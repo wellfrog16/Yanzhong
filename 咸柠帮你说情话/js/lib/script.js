@@ -610,7 +610,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         <div class="mengxiaomei-words jsfix" data-mode="top-right"></div>\
                         <div class="s5 jsfix"><textarea placeholder="请输入文字"></textarea></div>\
                         <div class="button jsfix"></div>\
-                        <div class="mask"><img src="img/scene03/loading.png" /></div>\
+                        <div class="mask"><div class="loading"></div></div>\
                     </div>\
                     <div class="swiper-slide scene04">\
                         <div class="audio jsfix"></div>\
