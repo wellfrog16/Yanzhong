@@ -123,13 +123,15 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 }, 100)
                 console.log('初始化完成')
             },
-            onSlideChangeEnd: function (swiper) {
+            onTransitionEnd: function (swiper) {
+                console.log('动画')
                 swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
             }
         });
     }
 
     self.man = true;
+    self.playing = false;
 
     self.scene = {
 
@@ -240,6 +242,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             close: function () {
                 $('.scene03 .mask').hide();
                 clearInterval(self.scene.s03.movie.timer[0]);
+                clearInterval(self.scene.s03.movie.timer[1]);
                 self.scene.s04.open();
             },
 
@@ -249,6 +252,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     if ($('.scene03 textarea').val() == '') { return; }
 
                     $('.scene03 .mask').show();
+                    self.scene.s03.movie.loading();
 
                     if (self.man) {
                         $('.scene04 .mengxiaomei').hide();
@@ -317,7 +321,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             },
 
             movie: {
-                timer: [null],
+                timer: [null, null],
                 play: function () {
                     if (self.man) {
                         self.scene.s03.movie.xianqige();
@@ -347,6 +351,18 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         width: 202,
                         height: 234
                     });
+                },
+
+                loading: function () {
+                    self.scene.s03.movie.timer[1] = frameplayer({
+                        target: $(".scene03 .voice-loading"),
+                        total: 3,
+                        row: 1,
+                        loop: true,
+                        fps: 3,
+                        width: 526,
+                        height: 467
+                    });
                 }
             }
         },
@@ -362,6 +378,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 clearInterval(self.scene.s04.movie.timer[0]);
                 clearInterval(self.scene.s04.movie.timer[1]);
                 clearInterval(self.scene.s04.movie.timer[2]);
+                clearInterval(self.scene.s04.movie.timer[3]);
                 self.scene.s05.open();
             },
 
@@ -377,11 +394,21 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     self.scene.s02.open();
                 });
 
-                $('.scene04 .audio').hammer().on("tap", function (e) {
+                $('.scene04 .audio-button').hammer().on("tap", function (e) {
+
+                    if (self.playing) { return }
                     //console.log('播放声音')
-                    //alert('播放')
+
+                    self.playing = true;
+
                     //$('audio')[0].play();
-                    createjs.Sound.play("myaudio", { loop: 0 });
+                    $('.scene04 .audio-button').removeClass('audio-button-play').addClass('audio-button-pause');
+                    var cc = createjs.Sound.play("myaudio", { loop: 0 });
+
+                    cc.on("complete", function () {
+                        $('.scene04 .audio-button').removeClass('audio-button-pause').addClass('audio-button-play');
+                        self.playing = false;
+                    }, this);
                 });
 
                 $('.btn-share').hammer().on("tap", function (e) {
@@ -401,8 +428,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             },
 
             movie: {
-                timer: [null, null, null],
+                timer: [null, null, null, null],
                 play: function () {
+                    self.scene.s04.movie.sound();
+
                     if (self.man) {
                         self.scene.s04.movie.xianqige();
                     }
@@ -430,6 +459,17 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         fps: 3,
                         width: 244,
                         height: 222
+                    });
+                },
+                sound: function () {
+                    self.scene.s04.movie.timer[3] = frameplayer({
+                        target: $(".scene04 .audio-sound"),
+                        total: 2,
+                        row: 1,
+                        loop: true,
+                        fps: 3,
+                        width: 538,
+                        height: 115
                     });
                 },
                 light: function () {
@@ -610,10 +650,12 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         <div class="mengxiaomei-words jsfix" data-mode="top-right"></div>\
                         <div class="s5 jsfix"><textarea placeholder="请输入文字"></textarea></div>\
                         <div class="button jsfix"></div>\
-                        <div class="mask"><div class="loading"></div></div>\
+                        <div class="mask"><div class="voice-loading jsfix" data-movie="yes"></div></div>\
                     </div>\
                     <div class="swiper-slide scene04">\
-                        <div class="audio jsfix"></div>\
+                        <div class="audio-words jsfix"></div>\
+                        <div class="audio-sound jsfix" data-movie="yes"></div>\
+                        <div class="audio-button-play audio-button jsfix"></div>\
                         <div class="xianqige jsfix" data-movie="yes"></div>\
                         <div class="mengxiaomei jsfix" data-movie="yes"></div>\
                         <div class="btn-retry jsfix"></div>\

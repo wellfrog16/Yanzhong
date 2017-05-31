@@ -286,17 +286,17 @@ body > .audio {
   text-align: center;
   display: none;
 }
-.scene03 .mask .loading {
-  width: 244px;
-  height: 222px;
+.scene03 .mask .voice-loading {
+  width: 526px;
+  height: 467px;
   position: absolute;
-  top: 415px;
-  left: 200px;
-  background-image: url(../img/scene04/mengxiaomei.png);
+  top: 20vh;
+  left: 50px;
+  background-image: url(../img/scene03/loading.png);
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
 }
-.scene04 .audio {
+.scene04 .audio-words {
   width: 588px;
   height: 314px;
   position: absolute;
@@ -305,6 +305,36 @@ body > .audio {
   background-image: url(../img/scene04/audio.png);
   background-repeat: no-repeat;
   background-size: contain;
+}
+.scene04 .audio-sound {
+  width: 538px;
+  height: 115px;
+  position: absolute;
+  top: 160px;
+  left: 44px;
+  background-image: url(../img/scene04/audio-sound.png);
+  background-repeat: no-repeat;
+  transform-origin: 0px 0px 0px;
+}
+.scene04 .audio-button-play {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 166px;
+  left: 248px;
+  background-image: url(../img/scene04/play.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.scene04 .audio-button-pause {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 166px;
+  left: 248px;
+  background-image: url(../img/scene04/pause.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .scene04 .xianqige {
   width: 364px;
