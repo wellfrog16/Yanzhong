@@ -85,7 +85,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
         function onComplete(e) {
 
-            //self.share();
+            self.share('none');
             
             
             self.initSwiper();
@@ -118,7 +118,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     $('.loading').fadeOut(function () {
                         swiperAnimate(swiper); //初始化完成开始动画
                         swiper.slideTo(0);
-                        self.scene.s01.open();
+                        self.scene.s02.open();
                     })
                 }, 100)
                 console.log('初始化完成')
@@ -161,10 +161,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     $(".scene01 .two").show();
                     self.scene.s01.movie.timer[0] = frameplayer({
                         target: $(".scene01 .two"),
-                        total: 2,
+                        total: 3,
                         row: 1,
                         loop: true,
-                        fps: 3,
+                        fps: 4,
                         width: 304,
                         height: 203
                     });
@@ -245,6 +245,9 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
             bindAciton: function () {
                 $('.scene03 .button').hammer().on("tap", function (e) {
+
+                    if ($('.scene03 textarea').val() == '') { return; }
+
                     $('.scene03 .mask').show();
 
                     if (self.man) {
@@ -253,6 +256,59 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     else {
                         $('.scene04 .xianqige').hide();
                     }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://www.tron-m.com/ifly/api/tts.do',
+                        data: JSON.stringify({
+                            "speaker": self.man ? "xiaoxin" : 'yefang',
+                            "text": $('.scene03 textarea').val(),
+                            "ssTempo": "",
+                            "ssPitch": "",
+                            "ssRate": ""
+                        }),
+                        contentType: 'application/json;charset=UTF-8',
+                        dataType:'json',
+                        success: function (json) {
+                            console.log('发送成功')
+                            console.log(json)
+
+                            $('audio').attr('src', 'http://www.tron-m.com/ifly/api/play.do?playId=' + json.result);
+                            self.voiceId = json.result;
+
+                            self.share(json.result);
+
+                            var loader = new createjs.LoadQueue(true);
+
+                            // 关键！----设置并发数  
+                            loader.setMaxConnections(5);
+                            // 关键！---一定要将其设置为 true, 否则不起作用。  
+                            loader.maintainScriptOrder = true;
+
+                            loader.on("progress", onProgress);
+                            loader.on("complete", onComplete);
+                            loader.installPlugin(createjs.Sound);
+                            loader.loadFile({ id: "myaudio", src: "http://www.tron-m.com/ifly/data/" + json.result + '.wav' });
+
+                            function onProgress(e) {
+
+                            }
+
+                            function onComplete(e) {
+
+                            }
+
+                        },
+                        error: function (xhr, textStatus) {
+                            console.log('错误')
+                            //console.log(xhr)
+                            //console.log(textStatus)
+                        },
+                        complete: function () {
+                            console.log('结束')
+                        },
+                        dataType: 'json'
+                    });
 
                     setTimeout(function () {
                         self.scene.s03.close();
@@ -311,12 +367,21 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
             bindAciton: function () {
                 $('.btn-retry').hammer().on("tap", function (e) {
+                    $('audio').removeAttr('src');
+                    $('.scene03 textarea').val('');
                     $('.scene03 .mengxiaomei, .scene03 .mengxiaomei-words').show();
                     $('.scene03 .xianqige, .scene03 .xianqige-words').show();
                     $('.scene04 .xianqige').show();
                     $('.scene04 .mengxiaomei').show();
 
                     self.scene.s02.open();
+                });
+
+                $('.scene04 .audio').hammer().on("tap", function (e) {
+                    //console.log('播放声音')
+                    //alert('播放')
+                    //$('audio')[0].play();
+                    createjs.Sound.play("myaudio", { loop: 0 });
                 });
 
                 $('.btn-share').hammer().on("tap", function (e) {
@@ -396,10 +461,8 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             open: function () {
                 self.scene.s05.bindAciton();                
                 self.swiper.slideTo(4);
+                self.scene.s05.movie.play();
 
-                setTimeout(function () {
-                    self.scene.s05.movie.play();
-                }, 1000)
             },
 
             close: function () {
@@ -411,9 +474,14 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             },
 
             movie: {
-                timer: [null],
+                timer: [null, null],
                 play: function () {
-                    self.scene.s05.movie.xianqige();
+                    
+                    self.scene.s05.movie.mengxiaomei();
+
+                    setTimeout(function () {
+                        self.scene.s05.movie.xianqige();
+                    }, 1000)
                 },
                 xianqige: function () {
                     $(".scene05 .xianqige").show();
@@ -425,6 +493,17 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         fps: 6,
                         width: 640,
                         height: 308
+                    });
+                },
+                mengxiaomei: function () {
+                    self.scene.s05.movie.timer[1] = frameplayer({
+                        target: $(".scene05 .mengxiaomei"),
+                        total: 3,
+                        row: 3,
+                        loop: true,
+                        fps: 4,
+                        width: 156,
+                        height: 181
                     });
                 }
             }
@@ -529,7 +608,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         <div class="xianqige-words jsfix" data-mode="top-right"></div>\
                         <div class="mengxiaomei jsfix" data-movie="yes"></div>\
                         <div class="mengxiaomei-words jsfix" data-mode="top-right"></div>\
-                        <div class="s5 jsfix"><input type="text" placeholder="测试" /></div>\
+                        <div class="s5 jsfix"><textarea placeholder="请输入文字"></textarea></div>\
                         <div class="button jsfix"></div>\
                         <div class="mask"><img src="img/scene03/loading.png" /></div>\
                     </div>\
@@ -547,7 +626,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     </div>\
                     <div class="swiper-slide scene05">\
                         <div class="s1 ani jsfix" swiper-animate-effect="zoomIn" swiper-animate-duration="0.5s" swiper-animate-delay="1.5s"></div>\
-                        <div class="mengxiaomei jsfix" data-mode="top-right"></div>\
+                        <div class="mengxiaomei jsfix" data-mode="top-right" data-movie="yes"></div>\
                         <div class="xianqige jsfix" data-movie="yes"></div>\
                     </div>\
                     <div class="swiper-slide scene06">\
@@ -576,16 +655,16 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
     })();
 
     // 分享
-    self.share = function () {
-        var host = "http://m.canon.com.cn/m/products/printer/pixma/pixmaevent";
-        var project = '';
+    self.share = function (voiceId) {
+        //var host = "http://m.canon.com.cn/m/products/printer/pixma/pixmaevent";
+        //var project = '';
 
         $.ajax({
             type: 'post',
-            url: host + '/share/jssdk',
-            data: { url: window.location.href, m: 'getWxConfig' },
-            //url: 'https://www.tron-m.com/wx/jssdk?m=getWxConfig',
-            //data: { url: window.location.href },
+            //url: host + '/share/jssdk',
+            //data: { url: window.location.href, m: 'getWxConfig' },
+            url: 'http://www.tron-m.com/wx/jssdk?m=getWxConfig',
+            //data: { url: 'http://www.tron-m.com/frog/yanzhong/20170530/?voiceId=' + voiceId },
             dataType: 'json',
             success: function (args) {
                 ////////////
@@ -600,11 +679,15 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone', 'scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                 });
 
+                function callback(){
+                    alert(11)
+                }
+
                 wx.ready(function () {
-                    var url = document.location.href,
-                        title = '111111',
-                        desc = '2222222',
-                        imgUrl = host + '/img/main/sharecover.jpg'
+                    var url = 'http://www.tron-m.com/frog/yanzhong/20170530/?voiceId=' + voiceId,
+                        title = '咸柠帮你说情话',
+                        desc = '咸柠帮你说情话',
+                        imgUrl = 'http://www.tron-m.com/frog/yanzhong/20170530/img/main/bg.jpg'
 
                     wx.onMenuShareTimeline({
                         title: title, // 分享标题
@@ -613,6 +696,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         imgUrl: imgUrl, // 分享图标
                         success: function () {
                             // 用户确认分享后执行的回调函数
+                            callback()
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数
@@ -628,6 +712,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                         success: function () {
                             // 用户确认分享后执行的回调函数
+                            callback()
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数
@@ -641,6 +726,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         imgUrl: imgUrl, // 分享图标
                         success: function () {
                             // 用户确认分享后执行的回调函数
+                            callback()
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数
@@ -654,6 +740,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         imgUrl: imgUrl, // 分享图标
                         success: function () {
                             // 用户确认分享后执行的回调函数
+                            callback()
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数
@@ -667,6 +754,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         imgUrl: imgUrl, // 分享图标
                         success: function () {
                             // 用户确认分享后执行的回调函数
+                            callback()
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数

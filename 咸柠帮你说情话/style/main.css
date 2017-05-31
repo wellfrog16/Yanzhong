@@ -62,6 +62,9 @@ body {
   background-size: 100% auto;
   background-repeat: no-repeat;
 }
+body > .audio {
+  display: none;
+}
 .loading {
   width: 100%;
   height: 100%;
@@ -250,14 +253,16 @@ body {
   background-image: url(../img/scene03/input-bg.png);
   background-repeat: no-repeat;
   background-size: contain;
-  padding: 10px;
+  padding: 18px;
 }
-.scene03 .s5 input {
+.scene03 .s5 textarea {
   width: 100%;
   height: 100%;
-  text-align: center;
+  text-align: left;
   border: none;
   background: none;
+  font-size: 16px;
+  line-height: 16px;
   outline: none;
 }
 .scene03 .button {
@@ -407,6 +412,7 @@ body {
   right: 72px;
   background-image: url(../img/scene05/mengxiaomei.png);
   background-repeat: no-repeat;
+  transform-origin: right top;
   background-size: contain;
 }
 .scene06 > div {
