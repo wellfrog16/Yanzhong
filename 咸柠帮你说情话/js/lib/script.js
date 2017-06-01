@@ -118,7 +118,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     $('.loading').fadeOut(function () {
                         swiperAnimate(swiper); //初始化完成开始动画
                         swiper.slideTo(0);
-                        self.scene.s02.open();
+                        self.scene.s01.open();
                     })
                 }, 100)
                 console.log('初始化完成')
@@ -237,9 +237,11 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 self.scene.s03.bindAciton();
                 self.scene.s03.movie.play();
                 self.swiper.slideTo(2);
+                $('.block').css({ 'z-index': '-1' });
             },
 
             close: function () {
+                $('.block').css({ 'z-index': '9999' });
                 $('.scene03 .mask').hide();
                 clearInterval(self.scene.s03.movie.timer[0]);
                 clearInterval(self.scene.s03.movie.timer[1]);
@@ -299,7 +301,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                             }
 
                             function onComplete(e) {
-
+                                self.scene.s03.close();
                             }
 
                         },
@@ -314,9 +316,9 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         dataType: 'json'
                     });
 
-                    setTimeout(function () {
-                        self.scene.s03.close();
-                    }, 1000)
+                    //setTimeout(function () {
+                    //    self.scene.s03.close();
+                    //}, 1000)
                 });
             },
 
@@ -356,7 +358,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 loading: function () {
                     self.scene.s03.movie.timer[1] = frameplayer({
                         target: $(".scene03 .voice-loading"),
-                        total: 3,
+                        total: 7,
                         row: 1,
                         loop: true,
                         fps: 3,
@@ -503,6 +505,11 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 self.swiper.slideTo(4);
                 self.scene.s05.movie.play();
 
+                if (self.device != 'android') {
+                    setTimeout(function () {
+                        self.swiper.slideTo(5);
+                    }, 5000)
+                }
             },
 
             close: function () {
@@ -532,7 +539,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         loop: false,
                         fps: 6,
                         width: 640,
-                        height: 308
+                        height: 320
                     });
                 },
                 mengxiaomei: function () {
@@ -722,7 +729,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 });
 
                 function callback(){
-                    alert(11)
+                    self.swiper.slideTo(4);
                 }
 
                 wx.ready(function () {
