@@ -327,9 +327,18 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 play: function () {
                     if (self.man) {
                         self.scene.s03.movie.xianqige();
+
+                        setTimeout(function () {
+                            $('.qi').addClass('namemovedown');
+                        }, 500)
+                        
                     }
                     else {
                         self.scene.s03.movie.mengxiaomei();
+
+                        setTimeout(function () {
+                            $('.meng').addClass('namemovedown');
+                        }, 500)
                     }
                 },
                 xianqige: function () {
@@ -653,8 +662,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     <div class="swiper-slide scene03">\
                         <div class="xianqige jsfix" data-movie="yes"></div>\
                         <div class="xianqige-words jsfix" data-mode="top-right"></div>\
+                        <div class="qi jsfix" data-mode="top-right"></div>\
                         <div class="mengxiaomei jsfix" data-movie="yes"></div>\
                         <div class="mengxiaomei-words jsfix" data-mode="top-right"></div>\
+                        <div class="meng jsfix" data-mode="top-right"></div>\
                         <div class="s5 jsfix"><textarea placeholder="请输入文字"></textarea></div>\
                         <div class="button jsfix"></div>\
                         <div class="mask"><div class="voice-loading jsfix" data-movie="yes"></div></div>\
@@ -679,7 +690,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         <div class="xianqige jsfix" data-movie="yes"></div>\
                     </div>\
                     <div class="swiper-slide scene06">\
-                        <div class="s1"><img src="img/scene06/jd.jpg"></div>\
+                        <div class="s1"><img src="img/scene06/jd.png"></div>\
                         <div class="s2"><img src="img/scene06/youhui.png"></div>\
                         <div class="s3"><img src="img/scene06/button.png"></div>\
                     </div>\
