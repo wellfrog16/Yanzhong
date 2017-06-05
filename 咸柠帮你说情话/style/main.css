@@ -73,8 +73,35 @@ body > .audio {
   left: 0;
   text-align: center;
   color: #333;
-  line-height: 90vh;
   z-index: 99;
+}
+.loading .body {
+  width: 40vw;
+  height: 60vw;
+  margin: 25vh auto 0 auto;
+  position: relative;
+}
+.loading .circle {
+  width: 40vw;
+  height: 40vw;
+  background-image: url('../img/loading/circle.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.loading .circle img {
+  height: 70%;
+  margin-top: 15%;
+}
+.loading .text {
+  position: absolute;
+  width: 230px;
+  height: 49px;
+  background-image: url(../img/loading/text.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform-origin: 0px 0px 0px;
+  left: 1vw;
+  top: 48vw;
 }
 .swiper-container {
   width: 100%;
@@ -104,7 +131,7 @@ body > .audio {
   width: 426px;
   height: 129px;
   position: absolute;
-  top: 728px;
+  top: 828px;
   left: 99px;
   background-image: url(../img/scene01/button-next.png);
   background-repeat: no-repeat;
@@ -114,7 +141,7 @@ body > .audio {
   width: 196px;
   height: 123px;
   position: absolute;
-  top: 588px;
+  top: 668px;
   left: 104px;
   background-image: url(../img/scene01/bubble-dashan.png);
   background-repeat: no-repeat;
@@ -124,7 +151,7 @@ body > .audio {
   position: absolute;
   width: 213px;
   height: 124px;
-  top: 588px;
+  top: 668px;
   right: 95px;
   background-image: url(../img/scene01/bubble-biaobai.png);
   background-repeat: no-repeat;
@@ -146,7 +173,7 @@ body > .audio {
   width: 199px;
   height: 289px;
   position: absolute;
-  top: 427px;
+  top: 507px;
   left: 72px;
   transform-origin: 0px 0px 0px;
   background-image: url(../img/scene02/xianqige.png);
@@ -157,7 +184,7 @@ body > .audio {
   position: absolute;
   width: 156px;
   height: 234px;
-  top: 485px;
+  top: 565px;
   right: 102px;
   background-image: url(../img/scene02/mengxiaomei.png);
   background-repeat: no-repeat;
@@ -168,8 +195,8 @@ body > .audio {
   width: 258px;
   height: 111px;
   position: absolute;
-  top: 748px;
-  left: 53px;
+  top: 828px;
+  left: 40px;
   background-image: url(../img/scene02/button-boy.png);
   background-repeat: no-repeat;
   background-size: contain;
@@ -178,8 +205,8 @@ body > .audio {
   position: absolute;
   width: 265px;
   height: 111px;
-  top: 748px;
-  right: 45px;
+  top: 828px;
+  right: 40px;
   background-image: url(../img/scene02/button-girl.png);
   background-repeat: no-repeat;
   background-size: contain;
@@ -275,7 +302,7 @@ body > .audio {
   width: 534px;
   height: 229px;
   position: absolute;
-  top: 382px;
+  top: 432px;
   left: 50px;
   background-image: url(../img/scene03/input-bg.png);
   background-repeat: no-repeat;
@@ -296,7 +323,7 @@ body > .audio {
   width: 416px;
   height: 109px;
   position: absolute;
-  top: 749px;
+  top: 828px;
   left: 113px;
   background-image: url(../img/scene03/button.png);
   background-repeat: no-repeat;
@@ -317,7 +344,7 @@ body > .audio {
   width: 526px;
   height: 467px;
   position: absolute;
-  top: 20vh;
+  top: 25vh;
   left: 50px;
   background-image: url(../img/scene03/loading.png);
   background-repeat: no-repeat;
@@ -367,7 +394,7 @@ body > .audio {
   width: 364px;
   height: 327px;
   position: absolute;
-  top: 381px;
+  top: 421px;
   left: 143px;
   background-image: url(../img/scene04/xianqige.png);
   background-repeat: no-repeat;
@@ -377,7 +404,7 @@ body > .audio {
   width: 244px;
   height: 222px;
   position: absolute;
-  top: 415px;
+  top: 455px;
   left: 200px;
   background-image: url(../img/scene04/mengxiaomei.png);
   background-repeat: no-repeat;
@@ -387,8 +414,8 @@ body > .audio {
   width: 229px;
   height: 114px;
   position: absolute;
-  top: 742px;
-  left: 74px;
+  top: 828px;
+  left: 55px;
   background-image: url(../img/scene04/button-retry.png);
   background-repeat: no-repeat;
   background-size: contain;
@@ -397,8 +424,8 @@ body > .audio {
   position: absolute;
   width: 229px;
   height: 114px;
-  top: 742px;
-  right: 74px;
+  top: 828px;
+  right: 55px;
   background-image: url(../img/scene04/button-share.png);
   background-repeat: no-repeat;
   background-size: contain;

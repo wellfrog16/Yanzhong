@@ -18,6 +18,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
         var source = [
           { 'src': 'main/bg.jpg' },
+
+          { 'src': 'loading/bottle.png' },
+          { 'src': 'loading/circle.png' },
+          { 'src': 'loading/text.png' }
         ]
 
         loader.on("complete", onComplete);
@@ -26,10 +30,21 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
         function onComplete() {
             $('body').append(self.template.loading);
 
+            self.loadTimer = frameplayer({
+                target: $(".loading .text"),
+                total: 4,
+                row: 1,
+                loop: true,
+                fps: 2,
+                width: 230,
+                height: 49
+            });
+
             self.load();
         }
     }
 
+    self.loadTimer = null
     self.load = function () {
         var loader = new createjs.LoadQueue(false);
 
@@ -85,15 +100,22 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
         function onComplete(e) {
 
-            self.share('none');
-            
-            
-            self.initSwiper();
+            clearInterval(self.loadTimer);
+            $('.loading .text').fadeOut();
+
+            setTimeout(function () {
+                self.share('none');
+                self.initSwiper();
+            }, 500)
+
         }
 
         function onProgress(e) {
             //console.log(loader.progress);
-            $('.loading span').text((loader.progress * 100 | 0) + " %");
+
+            $('.loading img').css('transform', 'rotate(' + (loader.progress * 360 | 0) + 'deg)');
+            
+            //$('.loading span').text((loader.progress * 100 | 0) + " %");
         }
     }
 
@@ -330,7 +352,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
                         setTimeout(function () {
                             $('.qi').addClass('namemovedown');
-                        }, 500)
+                        }, 1000)
                         
                     }
                     else {
@@ -338,7 +360,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
                         setTimeout(function () {
                             $('.meng').addClass('namemovedown');
-                        }, 500)
+                        }, 1000)
                     }
                 },
                 xianqige: function () {
@@ -514,11 +536,11 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 self.swiper.slideTo(4);
                 self.scene.s05.movie.play();
 
-                if (self.device != 'android') {
+                //if (self.device != 'android') {
                     setTimeout(function () {
                         self.swiper.slideTo(5);
                     }, 5000)
-                }
+                //}
             },
 
             close: function () {
@@ -639,7 +661,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
 
     self.template = {
-        loading: '<div class="loading"><span></span></div>',
+        loading: '<div class="loading"><div class="body"><div class="circle"><img src="img/loading/bottle.png" ></div><div class="text"></div></div></div>',
         swiper:
             '<div class="swiper-container">\
                 <div class="swiper-wrapper">\
@@ -740,7 +762,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 });
 
                 function callback(){
-                    self.swiper.slideTo(4);
+                    self.scene.s04.open();
                 }
 
                 wx.ready(function () {
