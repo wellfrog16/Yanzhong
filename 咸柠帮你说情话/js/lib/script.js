@@ -69,6 +69,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
           { 'src': 'scene03/button.png' },
           { 'src': 'scene03/input-bg.png' },
+          { 'src': 'scene03/input-bg-tips.png' },
           { 'src': 'scene03/loading.png' },
           { 'src': 'scene03/mengxiaomei-words.png' },
           { 'src': 'scene03/mengxiaomei.png' },
@@ -189,8 +190,8 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         row: 1,
                         loop: true,
                         fps: 4,
-                        width: 304,
-                        height: 203
+                        width: 400,
+                        height: 267
                     });
                 }
             }
@@ -271,6 +272,11 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             },
 
             bindAciton: function () {
+
+                $('.scene03 textarea').on('focus', function () {
+                    $('.scene03 .s5').css('background-image', 'url(img/scene03/input-bg.png)');
+                })
+
                 $('.scene03 .button').hammer().on("tap", function (e) {
 
                     if ($('.scene03 textarea').val() == '') { return; }
@@ -421,6 +427,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     $('.scene03 textarea').val('');
                     $('.scene03 .mengxiaomei, .scene03 .mengxiaomei-words').show();
                     $('.scene03 .xianqige, .scene03 .xianqige-words').show();
+                    $('.scene03 .s5').css('background-image', 'url(img/scene03/input-bg-tips.png)');
                     $('.scene04 .xianqige').show();
                     $('.scene04 .mengxiaomei').show();
 
@@ -490,8 +497,8 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         row: 1,
                         loop: true,
                         fps: 3,
-                        width: 244,
-                        height: 222
+                        width: 364,
+                        height: 331
                     });
                 },
                 sound: function () {
@@ -688,7 +695,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         <div class="mengxiaomei jsfix" data-movie="yes"></div>\
                         <div class="mengxiaomei-words jsfix" data-mode="top-right"></div>\
                         <div class="meng jsfix" data-mode="top-right"></div>\
-                        <div class="s5 jsfix"><textarea placeholder="请输入文字"></textarea></div>\
+                        <div class="s5 jsfix"><textarea maxlength="100"></textarea></div>\
                         <div class="button jsfix"></div>\
                         <div class="mask"><div class="voice-loading jsfix" data-movie="yes"></div></div>\
                     </div>\
