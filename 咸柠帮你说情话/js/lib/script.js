@@ -4,9 +4,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
     var self = {}
 
     self.open = function () {
-        // loading界面
+        // loading界面        
         self.preload();
     }
+
 
     self.preload = function () {
         var loader = new createjs.LoadQueue(false);
@@ -100,10 +101,9 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
 
         function onComplete(e) {
-
             clearInterval(self.loadTimer);
             $('.loading .text').fadeOut();
-
+            
             setTimeout(function () {
                 self.share('none');
                 self.initSwiper();
@@ -167,13 +167,13 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             },
 
             close: function () {
-                clearInterval(self.scene.s01.movie.timer[0]);
-                self.scene.s02.open();
+                clearInterval(self.scene.s01.movie.timer[0]);                
             },
 
             bindAciton: function () {
-                $('.scene01 .button').hammer().on("tap", function (e) {
+                $('.scene01 .button, .scene01 .s4,.scene01 .s5').hammer().on("tap", function (e) {
                     self.scene.s01.close();
+                    self.scene.s02.open();
                 });
             },
 
@@ -207,20 +207,21 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
             close: function () {
                 clearInterval(self.scene.s02.movie.timer[0]);
-                clearInterval(self.scene.s02.movie.timer[1]);
-                self.scene.s03.open();
+                clearInterval(self.scene.s02.movie.timer[1]);                
             },
 
             bindAciton: function () {
                 $('.scene02 .btn-mengxiaomei').hammer().on("tap", function (e) {
                     self.man = false;
-                    $('.scene03 .xianqige, .scene03 .xianqige-words').hide();
+                    $('.scene03 .mengxiaomei, .scene03 .mengxiaomei-words').show();
                     self.scene.s02.close();
+                    self.scene.s03.open();
                 });
 
-                $('.scene02 .btn-xianqige').hammer().on("tap", function (e) {                    
-                    $('.scene03 .mengxiaomei, .scene03 .mengxiaomei-words').hide();
+                $('.scene02 .btn-xianqige').hammer().on("tap", function (e) {
+                    $('.scene03 .xianqige, .scene03 .xianqige-words').show();
                     self.scene.s02.close();
+                    self.scene.s03.open();
                 });
             },
 
@@ -267,8 +268,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 $('.block').css({ 'z-index': '9999' });
                 $('.scene03 .mask').hide();
                 clearInterval(self.scene.s03.movie.timer[0]);
-                clearInterval(self.scene.s03.movie.timer[1]);
-                self.scene.s04.open();
+                clearInterval(self.scene.s03.movie.timer[1]);                
             },
 
             bindAciton: function () {
@@ -285,10 +285,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     self.scene.s03.movie.loading();
 
                     if (self.man) {
-                        $('.scene04 .mengxiaomei').hide();
+                        $('.scene04 .xianqige').show();
                     }
                     else {
-                        $('.scene04 .xianqige').hide();
+                        $('.scene04 .mengxiaomei').show();
                     }
 
                     $.ajax({
@@ -307,7 +307,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                             console.log('发送成功')
                             console.log(json)
 
-                            $('audio').attr('src', 'http://www.tron-m.com/ifly/api/play.do?playId=' + json.result);
+                            //$('audio').attr('src', 'http://www.tron-m.com/ifly/api/play.do?playId=' + json.result);
                             self.voiceId = json.result;
 
                             self.share(json.result);
@@ -330,6 +330,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
                             function onComplete(e) {
                                 self.scene.s03.close();
+                                self.scene.s04.open();
                             }
 
                         },
@@ -344,9 +345,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         dataType: 'json'
                     });
 
-                    //setTimeout(function () {
-                    //    self.scene.s03.close();
-                    //}, 1000)
+                    setTimeout(function () {
+                        self.scene.s03.close();
+                        self.scene.s04.open();
+                    }, 1000)
                 });
             },
 
@@ -418,19 +420,20 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 clearInterval(self.scene.s04.movie.timer[1]);
                 clearInterval(self.scene.s04.movie.timer[2]);
                 clearInterval(self.scene.s04.movie.timer[3]);
-                self.scene.s05.open();
+                
             },
 
             bindAciton: function () {
                 $('.btn-retry').hammer().on("tap", function (e) {
                     $('audio').removeAttr('src');
                     $('.scene03 textarea').val('');
-                    $('.scene03 .mengxiaomei, .scene03 .mengxiaomei-words').show();
-                    $('.scene03 .xianqige, .scene03 .xianqige-words').show();
+                    $('.scene03 .mengxiaomei, .scene03 .mengxiaomei-words').hide();
+                    $('.scene03 .xianqige, .scene03 .xianqige-words').hide();
                     $('.scene03 .s5').css('background-image', 'url(img/scene03/input-bg-tips.png)');
-                    $('.scene04 .xianqige').show();
-                    $('.scene04 .mengxiaomei').show();
+                    $('.scene04 .xianqige').hide();
+                    $('.scene04 .mengxiaomei').hide();
 
+                    self.scene.s04.close();
                     self.scene.s02.open();
                 });
 
@@ -443,10 +446,13 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
                     //$('audio')[0].play();
                     $('.scene04 .audio-button').removeClass('audio-button-play').addClass('audio-button-pause');
+                    $('.scene04 .audio-button').addClass('audio-rotate');
                     var cc = createjs.Sound.play("myaudio", { loop: 0 });
 
                     cc.on("complete", function () {
                         $('.scene04 .audio-button').removeClass('audio-button-pause').addClass('audio-button-play');
+                        $('.scene04 .audio-button').removeClass('audio-rotate');
+                        $('.scene04 .audio-button').css('transform', 'rotate(0deg)');
                         self.playing = false;
                     }, this);
                 });
@@ -458,12 +464,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     self.scene.s04.movie.two();
                 });
 
-                //$('.scene04 .share, .scene05 .s1').hammer().on("tap", function (e) {
-                //    self.swiper.slideNext();
-                //});
-
+                // 点击去下一页
                 $('.scene04 .share').hammer().on("tap", function (e) {
                     self.scene.s04.close();
+                    self.scene.s05.open();
                 });
             },
 
@@ -544,9 +548,9 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 self.scene.s05.movie.play();
 
                 //if (self.device != 'android') {
-                    setTimeout(function () {
-                        self.swiper.slideTo(5);
-                    }, 5000)
+                    //setTimeout(function () {
+                    //    self.swiper.slideTo(5);
+                    //}, 6000)
                 //}
             },
 
@@ -555,7 +559,11 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             },
 
             bindAciton: function () {
-
+                $('.scene05 .s1').on('webkitAnimationEnd', function () {
+                    setTimeout(function () {
+                        self.swiper.slideTo(5);
+                    }, 2000)
+                });
             },
 
             movie: {
@@ -669,6 +677,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
     self.template = {
         loading: '<div class="loading"><div class="body"><div class="circle"><img src="img/loading/bottle.png" ></div><div class="text"></div></div></div>',
+        replay : '',
         swiper:
             '<div class="swiper-container">\
                 <div class="swiper-wrapper">\
@@ -745,8 +754,6 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
     // 分享
     self.share = function (voiceId) {
-        //var host = "http://m.canon.com.cn/m/products/printer/pixma/pixmaevent";
-        //var project = '';
 
         $.ajax({
             type: 'post',
@@ -769,14 +776,14 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 });
 
                 function callback(){
-                    self.scene.s04.open();
+                    if (voiceId != 'none') { self.scene.s05.open(); }
                 }
 
                 wx.ready(function () {
-                    var url = 'http://www.tron-m.com/frog/yanzhong/20170530/?voiceId=' + voiceId,
+                    var url = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile04/?man=' + (self.man ? 1 : 0) + '&voiceId=' + voiceId,
                         title = '咸柠帮你说情话',
                         desc = '咸柠帮你说情话',
-                        imgUrl = 'http://www.tron-m.com/frog/yanzhong/20170530/img/main/bg.jpg'
+                        imgUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile04/img/main/bg.jpg'
 
                     wx.onMenuShareTimeline({
                         title: title, // 分享标题
@@ -785,7 +792,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         imgUrl: imgUrl, // 分享图标
                         success: function () {
                             // 用户确认分享后执行的回调函数
-                            callback()
+                            callback();
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数

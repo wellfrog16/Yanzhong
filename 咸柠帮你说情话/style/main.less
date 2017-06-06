@@ -218,6 +218,7 @@ body {
         background-image:url(../img/scene03/xianqige.png);
         background-repeat:no-repeat;
         transform-origin: 0px 0px 0px;
+        display:none;
     }
 
     .xianqige-words {
@@ -229,6 +230,7 @@ body {
         background-image:url(../img/scene03/xianqige-words.png);
         background-repeat:no-repeat;
         background-size:contain;
+        display:none;
     }
 
     .mengxiaomei {
@@ -236,6 +238,7 @@ body {
         background-image:url(../img/scene03/mengxiaomei.png);
         background-repeat:no-repeat;
         transform-origin: 0px 0px 0px;
+        display:none;
     }
 
     .mengxiaomei-words {
@@ -247,6 +250,7 @@ body {
         background-image:url(../img/scene03/mengxiaomei-words.png);
         background-repeat:no-repeat;
         background-size:contain;
+        display:none;
     }
 
     .qi {
@@ -339,17 +343,21 @@ body {
     }
 
     .audio-button-play {
-        .absolute-box(100px, 100px, 186px, 248px);
+        .absolute-box(100px, 100px, 187px, 248px);
         background-image:url(../img/scene04/play.png);
         background-repeat:no-repeat;
         background-size:cover;
     }
 
     .audio-button-pause {
-        .absolute-box(100px, 100px, 186px, 248px);
+        .absolute-box(100px, 100px, 187px, 248px);
         background-image:url(../img/scene04/pause.png);
         background-repeat:no-repeat;
         background-size:cover;
+    }
+
+    .audio-rotate {
+        animation: playRotate 5s linear 0s infinite normal;
     }
 
     .xianqige {
@@ -357,6 +365,7 @@ body {
         background-image:url(../img/scene04/xianqige.png);
         background-repeat:no-repeat;
         transform-origin: 0px 0px 0px;
+        display:none;
     }
 
     .mengxiaomei {
@@ -364,6 +373,7 @@ body {
         background-image:url(../img/scene04/mengxiaomei.png);
         background-repeat:no-repeat;
         transform-origin: 0px 0px 0px;
+        display:none;
     }
 
     .btn-retry {
@@ -468,6 +478,24 @@ body {
         margin-top:5vh;
         width:40%;
     }
+}
+
+
+// ------------------------------------replay-----------------------------------------
+.replay {
+    .char {
+        text-align:center;
+        margin-top:10vh;
+
+        img {
+            width:70%;
+        }
+    }
+}
+
+@keyframes playRotate {
+    0% { transform:rotate(0deg);}
+    100% { transform:rotate(360deg);}
 }
 
 

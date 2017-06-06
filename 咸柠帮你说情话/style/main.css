@@ -240,6 +240,7 @@ body > .audio {
   background-image: url(../img/scene03/xianqige.png);
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
+  display: none;
 }
 .scene03 .xianqige-words {
   position: absolute;
@@ -250,6 +251,7 @@ body > .audio {
   background-image: url(../img/scene03/xianqige-words.png);
   background-repeat: no-repeat;
   background-size: contain;
+  display: none;
 }
 .scene03 .mengxiaomei {
   width: 202px;
@@ -260,6 +262,7 @@ body > .audio {
   background-image: url(../img/scene03/mengxiaomei.png);
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
+  display: none;
 }
 .scene03 .mengxiaomei-words {
   position: absolute;
@@ -270,6 +273,7 @@ body > .audio {
   background-image: url(../img/scene03/mengxiaomei-words.png);
   background-repeat: no-repeat;
   background-size: contain;
+  display: none;
 }
 .scene03 .qi {
   position: absolute;
@@ -374,7 +378,7 @@ body > .audio {
   width: 100px;
   height: 100px;
   position: absolute;
-  top: 186px;
+  top: 187px;
   left: 248px;
   background-image: url(../img/scene04/play.png);
   background-repeat: no-repeat;
@@ -384,11 +388,14 @@ body > .audio {
   width: 100px;
   height: 100px;
   position: absolute;
-  top: 186px;
+  top: 187px;
   left: 248px;
   background-image: url(../img/scene04/pause.png);
   background-repeat: no-repeat;
   background-size: cover;
+}
+.scene04 .audio-rotate {
+  animation: playRotate 5s linear 0s infinite normal;
 }
 .scene04 .xianqige {
   width: 364px;
@@ -399,6 +406,7 @@ body > .audio {
   background-image: url(../img/scene04/xianqige.png);
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
+  display: none;
 }
 .scene04 .mengxiaomei {
   width: 364px;
@@ -409,6 +417,7 @@ body > .audio {
   background-image: url(../img/scene04/mengxiaomei.png);
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
+  display: none;
 }
 .scene04 .btn-retry {
   width: 229px;
@@ -519,6 +528,21 @@ body > .audio {
 .scene06 .s3 img {
   margin-top: 5vh;
   width: 40%;
+}
+.replay .char {
+  text-align: center;
+  margin-top: 10vh;
+}
+.replay .char img {
+  width: 70%;
+}
+@keyframes playRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @keyframes nameMovedown {
   from {

@@ -32,17 +32,25 @@
 });
 
 
-require(["jquery", 'script'], function ($, script) {
+require(["jquery", 'script', 'replay', 'tools'], function ($, script, replay, tools) {
 
     // 禁止拉动
     $("body").on("touchmove", function (e) {
         e.preventDefault();
     });
 
-    // 
-    //$("body").on("touchstart", function (e) {
-    //    e.preventDefault();
-    //});
+     
+    $("body").on("touchstart", function (e) {
+        e.preventDefault();
+    });
 
-    script.open();    
+    var vid = tools.getUrlParam('voiceId');
+
+    if (vid) {
+        replay.open();
+    }
+    else {
+        script.open();
+    }
+    
 });
