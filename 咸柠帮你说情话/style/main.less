@@ -21,9 +21,14 @@
         background: #333;
         color: #fff;
         text-align: center;
-        line-height: 100vh;
-        font-size:20vh;
+        //line-height: 100vh;
+        font-size:16px;
         //display: none;
+
+        img {
+            margin:12% 0 2% 0;
+            width:40%;
+        }
     }
 }
 
@@ -197,7 +202,15 @@ body {
         background-size:contain;
     }
 
-    .s5 {
+    .info {
+        .absolute-box(640px, 388px, 125px, 0px);
+        background-image:url(../img/scene02/info.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+        transform-origin: 0 0 0;
+    }
+
+    /*.s5 {
         .absolute-box(544px, 366px, 165px, 48px);
         background-image:url(../img/scene02/info-bg.png);
         background-repeat:no-repeat;
@@ -209,7 +222,7 @@ body {
         background-image:url(../img/scene02/info-words.png);
         background-repeat:no-repeat;
         background-size:contain;
-    }
+    }*/
 }
 
 .scene03 {
@@ -262,7 +275,7 @@ body {
         background-image:url(../img/scene03/qi.png);
         background-repeat:no-repeat;
         background-size:contain;
-        display:none;
+        //display:none;
         
     }
 
@@ -275,6 +288,10 @@ body {
         background-image:url(../img/scene03/meng.png);
         background-repeat:no-repeat;
         background-size:contain;
+        //display:none;
+    }
+
+    .qi-box, .meng-box {
         display:none;
     }
 
@@ -288,8 +305,9 @@ body {
         .absolute-box(534px, 229px, 432px, 50px);
         background-image:url(../img/scene03/input-bg-tips.png);
         background-repeat:no-repeat;
-        background-size:contain;
+        background-size:cover;
         padding:18px;
+        //animation:kf-inputbg 1000ms steps(1, end) infinite;
 
         textarea {
             width:100%;
@@ -301,6 +319,11 @@ body {
             line-height:16px;
             outline:none;
         }
+    }
+
+    .line {
+        .absolute-box(4px, 36px, 558px, 450px);
+        background-color:#ed7d31;
     }
 
     .button {
@@ -336,21 +359,21 @@ body {
     }
 
     .audio-sound {
-        .absolute-box(538px, 115px, 180px, 44px);
+        .absolute-box(549px, 116px, 180px, 44px);
         background-image:url(../img/scene04/audio-sound.png);
         background-repeat:no-repeat;
         transform-origin: 0px 0px 0px;
     }
 
     .audio-button-play {
-        .absolute-box(100px, 100px, 187px, 248px);
+        .absolute-box(100px, 100px, 187px, 268px);
         background-image:url(../img/scene04/play.png);
         background-repeat:no-repeat;
         background-size:cover;
     }
 
     .audio-button-pause {
-        .absolute-box(100px, 100px, 187px, 248px);
+        .absolute-box(100px, 100px, 187px, 268px);
         background-image:url(../img/scene04/pause.png);
         background-repeat:no-repeat;
         background-size:cover;
@@ -430,11 +453,13 @@ body {
 }
 
 .scene05 {
-    .s1 {
+    .finished {
         .absolute-box(593px, 440px, 85px, 28px);
         background-image:url(../img/scene05/finished.png);
         background-repeat:no-repeat;
         background-size:contain;
+        transform-origin:0 0 0;
+        display:none;
     }
 
     .xianqige {
@@ -456,6 +481,7 @@ body {
         background-repeat:no-repeat;
         transform-origin:right top;
         background-size:contain;
+        display:none;
     }
 }
 
@@ -483,13 +509,74 @@ body {
 
 // ------------------------------------replay-----------------------------------------
 .replay {
-    .char {
-        text-align:center;
-        margin-top:10vh;
+    display:none;
 
-        img {
-            width:70%;
-        }
+    .xianqige {
+        .absolute-box(512px, 459px, 128px, 63px);
+        background-image:url(../img/replay/xianqige.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+        display:none;
+    }
+
+    .mengxiaomei {
+        .absolute-box(430px, 391px, 102px, 100px);
+        background-image:url(../img/replay/mengxiaomei.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+        display:none;
+    }
+
+    .audio-bg {
+        .absolute-box(581px, 362px, 375px, 24px);
+        background-image:url(../img/scene01/info-bg.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .audio-words {
+        .absolute-box(447px, 59px, 427px, 90px);
+        background-image:url(../img/replay/words.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .audio-sound {
+        .absolute-box(549px, 116px, 510px, 35px);
+        background-image:url(../img/scene04/audio-sound.png);
+        background-repeat:no-repeat;
+        transform-origin: 0px 0px 0px;
+    }
+
+    .audio-button-play {
+        .absolute-box(100px, 100px, 517px, 260px);
+        background-image:url(../img/scene04/play.png);
+        background-repeat:no-repeat;
+        background-size:cover;
+    }
+
+    .audio-button-pause {
+        .absolute-box(100px, 100px, 187px, 260px);
+        background-image:url(../img/scene04/pause.png);
+        background-repeat:no-repeat;
+        background-size:cover;
+    }
+
+    .audio-rotate {
+        animation: playRotate 5s linear 0s infinite normal;
+    }
+
+    .nickname {
+        .absolute-box(110px, 30px, 450px, 152px);
+        text-align:center;
+        //border:1px solid red;
+    }
+
+    .button {
+        .absolute-box(263px, 110px, 828px, 180px);
+        background-image:url(../img/replay/button.png);
+        background-repeat:no-repeat;
+        background-size:contain;
     }
 }
 
@@ -503,3 +590,8 @@ body {
     from { margin-top:-30vh; }
     to {margin-top:0vh;}
 }
+
+/*@keyframes kf-inputbg {
+    0% {background-position-y: 0;}
+    50% {background-position-y: 100%;}
+}*/

@@ -1,11 +1,90 @@
 // 剧本
 
-define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, swiper, wx, frameplayer) {
+define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], function ($, swiper, wx, frameplayer, tools) {
     var self = {}
 
+    self.code = null;
+    self.user = null;
+
+    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile13'
+    self.jd = 'https://item.jd.com/1726224.html'
+
     self.open = function () {
-        // loading界面        
-        self.preload();
+
+        //self.preload();
+        //return
+
+        self.authorization();
+    }
+
+    // 检查授权
+    self.authorization = function () {
+        self.code = tools.getUrlParam('code');
+
+        
+        if (self.code == null) { // 未授权
+            $.ajax({
+                type: 'POST',
+                url: 'http://www.tron-m.com/ifly/api/snsUserinfoCode.do',
+                data: {
+                    'redirect_uri': self.baseUrl
+                },
+                //contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                success: function (json) {
+                    console.log('发送成功')
+                    console.log(json)
+                    //alert(json.code)
+                    //alert(json.message)
+                    location.href = json.result;
+
+                },
+                error: function (xhr, textStatus) {
+                    console.log('错误')
+                    //console.log(xhr)
+                    //console.log(textStatus)
+                },
+                complete: function () {
+                    console.log('结束')
+                },
+                dataType: 'json'
+            });
+        }
+        else { // 已经授权
+
+            _hmt.push(['_trackEvent', '浏览', '主题']);
+
+            // 用户已经授权，读取用户信息
+            $.ajax({
+                type: 'POST',
+                url: 'http://www.tron-m.com/ifly/api/snsUserinfo.do',
+                data: {
+                    'code': self.code
+                },
+                //contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                success: function (json) {
+
+                    self.user = json.result;
+
+                    // loading界面        
+                    self.preload();
+                },
+                error: function (xhr, textStatus) {
+                    console.log('错误')
+
+                    location.href = self.baseUrl;
+                    //console.log(xhr)
+                    //console.log(textStatus)
+                },
+                complete: function () {
+                    console.log('结束')
+                },
+                dataType: 'json'
+            });
+
+
+        }
     }
 
 
@@ -101,14 +180,12 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
 
         function onComplete(e) {
+
             clearInterval(self.loadTimer);
             $('.loading .text').fadeOut();
-            
-            setTimeout(function () {
-                self.share('none');
-                self.initSwiper();
-            }, 500)
 
+            self.share('none');
+            self.initSwiper();
         }
 
         function onProgress(e) {
@@ -140,7 +217,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 setTimeout(function () {
                     $('.loading').fadeOut(function () {
                         swiperAnimate(swiper); //初始化完成开始动画
-                        swiper.slideTo(0);
+
                         self.scene.s01.open();
                     })
                 }, 100)
@@ -158,12 +235,14 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
     self.scene = {
 
-        s01 : {
+        s01: {
+            inited : false,
             open: function () {
                 self.scene.s01.bindAciton();
                 setTimeout(function () {
                     self.scene.s01.movie.play();
-                }, 1000);                
+                }, 1000);
+                self.swiper.slideTo(0);
             },
 
             close: function () {
@@ -171,6 +250,9 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             },
 
             bindAciton: function () {
+                if (self.scene.s01.inited) { return false; }
+                else { self.scene.s01.inited = true; }
+
                 $('.scene01 .button, .scene01 .s4,.scene01 .s5').hammer().on("tap", function (e) {
                     self.scene.s01.close();
                     self.scene.s02.open();
@@ -198,6 +280,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
         },
 
         s02: {
+            inited: false,
             open: function () {
                 self.man = true;
                 self.scene.s02.bindAciton();
@@ -207,10 +290,14 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
 
             close: function () {
                 clearInterval(self.scene.s02.movie.timer[0]);
-                clearInterval(self.scene.s02.movie.timer[1]);                
+                clearInterval(self.scene.s02.movie.timer[1]);
+                clearInterval(self.scene.s02.movie.timer[2]);
             },
 
             bindAciton: function () {
+                if (self.scene.s02.inited) { return false; }
+                else { self.scene.s02.inited = true; }
+
                 $('.scene02 .btn-mengxiaomei').hammer().on("tap", function (e) {
                     self.man = false;
                     $('.scene03 .mengxiaomei, .scene03 .mengxiaomei-words').show();
@@ -230,6 +317,18 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 play: function () {
                     self.scene.s02.movie.xianqige();
                     self.scene.s02.movie.mengxiaomei();
+                    self.scene.s02.movie.info();
+                },
+                info: function () {
+                    self.scene.s02.movie.timer[2] = frameplayer({
+                        target: $(".scene02 .info"),
+                        total: 10,
+                        row: 1,
+                        loop: true,
+                        fps: 3,
+                        width: 640,
+                        height: 388
+                    });
                 },
                 xianqige: function () {
                     self.scene.s02.movie.timer[0] = frameplayer({
@@ -257,6 +356,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
         },
 
         s03: {
+            inited: false,
             open: function () {
                 self.scene.s03.bindAciton();
                 self.scene.s03.movie.play();
@@ -268,13 +368,25 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 $('.block').css({ 'z-index': '9999' });
                 $('.scene03 .mask').hide();
                 clearInterval(self.scene.s03.movie.timer[0]);
-                clearInterval(self.scene.s03.movie.timer[1]);                
+                clearInterval(self.scene.s03.movie.timer[1]);
+                clearInterval(self.scene.s03.movie.timer[2]);
+                $('.scene03 .line').hide();
+                $('.scene03 textarea').blur();
+                $('.scene03 textarea').val('');
+                $('.scene03 .mengxiaomei, .scene03 .meng-box, .scene03 .mengxiaomei-words').hide();
+                $('.scene03 .xianqige, .scene03 .qi-box, .scene03 .xianqige-words').hide();
+                $('.scene03 .s5').css('background-image', 'url(img/scene03/input-bg-tips.png)');
             },
 
             bindAciton: function () {
+                if (self.scene.s03.inited) { return false; }
+                else { self.scene.s03.inited = true; }
 
-                $('.scene03 textarea').on('focus', function () {
+                $('.scene03 .s5').hammer().on("tap", function () {
                     $('.scene03 .s5').css('background-image', 'url(img/scene03/input-bg.png)');
+                    clearInterval(self.scene.s03.movie.timer[2]);
+                    $('.scene03 .line').hide();
+                    $('.scene03 textarea').focus();
                 })
 
                 $('.scene03 .button').hammer().on("tap", function (e) {
@@ -295,6 +407,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         type: 'POST',
                         url: 'http://www.tron-m.com/ifly/api/tts.do',
                         data: JSON.stringify({
+                            'userId': self.user.id,
                             "speaker": self.man ? "xiaoxin" : 'yefang',
                             "text": $('.scene03 textarea').val(),
                             "ssTempo": "",
@@ -307,10 +420,12 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                             console.log('发送成功')
                             console.log(json)
 
+                            //alert(json)
+
                             //$('audio').attr('src', 'http://www.tron-m.com/ifly/api/play.do?playId=' + json.result);
                             self.voiceId = json.result;
 
-                            self.share(json.result);
+                            self.share(json.result, self.user.nickname);
 
                             var loader = new createjs.LoadQueue(true);
 
@@ -336,6 +451,8 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         },
                         error: function (xhr, textStatus) {
                             console.log('错误')
+                            //alert(xhr)
+                            //alert(textStatus)
                             //console.log(xhr)
                             //console.log(textStatus)
                         },
@@ -345,30 +462,35 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         dataType: 'json'
                     });
 
-                    setTimeout(function () {
-                        self.scene.s03.close();
-                        self.scene.s04.open();
-                    }, 1000)
+                    //setTimeout(function () {
+                    //    self.scene.s03.close();
+                    //    self.scene.s04.open();
+                    //}, 1000)
                 });
             },
 
             movie: {
-                timer: [null, null],
+                timer: [null, null, null],
                 play: function () {
+                    self.scene.s03.movie.line();
+
                     if (self.man) {
                         self.scene.s03.movie.xianqige();
 
-                        setTimeout(function () {
-                            $('.qi').addClass('namemovedown');
-                        }, 1000)
+                        $('.qi-box').show();
+
+                        //setTimeout(function () {
+                            //$('.qi').show();
+                        //}, 1000)
                         
                     }
                     else {
                         self.scene.s03.movie.mengxiaomei();
 
-                        setTimeout(function () {
-                            $('.meng').addClass('namemovedown');
-                        }, 1000)
+                        $('.meng-box').show();
+                        //setTimeout(function () {
+                            //$('.meng').show();
+                        //}, 1000)
                     }
                 },
                 xianqige: function () {
@@ -394,6 +516,12 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                     });
                 },
 
+                line : function(){
+                    self.scene.s03.movie.timer[2] = setInterval(function () {
+                        $('.scene03 .line').toggle();
+                    }, 1000)
+                },
+
                 loading: function () {
                     self.scene.s03.movie.timer[1] = frameplayer({
                         target: $(".scene03 .voice-loading"),
@@ -409,6 +537,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
         },
 
         s04: {
+            inited: false,
             open: function () {
                 self.scene.s04.bindAciton();
                 self.scene.s04.movie.play();
@@ -420,19 +549,17 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 clearInterval(self.scene.s04.movie.timer[1]);
                 clearInterval(self.scene.s04.movie.timer[2]);
                 clearInterval(self.scene.s04.movie.timer[3]);
+
+                $('.scene04 .xianqige').hide();
+                $('.scene04 .mengxiaomei').hide();
                 
             },
 
             bindAciton: function () {
-                $('.btn-retry').hammer().on("tap", function (e) {
-                    $('audio').removeAttr('src');
-                    $('.scene03 textarea').val('');
-                    $('.scene03 .mengxiaomei, .scene03 .mengxiaomei-words').hide();
-                    $('.scene03 .xianqige, .scene03 .xianqige-words').hide();
-                    $('.scene03 .s5').css('background-image', 'url(img/scene03/input-bg-tips.png)');
-                    $('.scene04 .xianqige').hide();
-                    $('.scene04 .mengxiaomei').hide();
+                if (self.scene.s04.inited) { return false; }
+                else { self.scene.s04.inited = true; }
 
+                $('.btn-retry').hammer().on("tap", function (e) {
                     self.scene.s04.close();
                     self.scene.s02.open();
                 });
@@ -512,8 +639,8 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         row: 1,
                         loop: true,
                         fps: 3,
-                        width: 538,
-                        height: 115
+                        width: 549,
+                        height: 116
                     });
                 },
                 light: function () {
@@ -542,39 +669,47 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
         },
 
         s05: {
+            inited: false,
             open: function () {
                 self.scene.s05.bindAciton();                
                 self.swiper.slideTo(4);
                 self.scene.s05.movie.play();
-
-                //if (self.device != 'android') {
-                    //setTimeout(function () {
-                    //    self.swiper.slideTo(5);
-                    //}, 6000)
-                //}
             },
 
             close: function () {
-
+                clearInterval(self.scene.s05.movie.timer[0]);
+                clearInterval(self.scene.s05.movie.timer[1]);
+                clearInterval(self.scene.s05.movie.timer[2]);
             },
 
             bindAciton: function () {
-                $('.scene05 .s1').on('webkitAnimationEnd', function () {
-                    setTimeout(function () {
-                        self.swiper.slideTo(5);
-                    }, 2000)
-                });
+
             },
 
             movie: {
-                timer: [null, null],
+                timer: [null, null, null],
                 play: function () {
-                    
-                    self.scene.s05.movie.mengxiaomei();
-
                     setTimeout(function () {
                         self.scene.s05.movie.xianqige();
-                    }, 1000)
+                    }, 500)
+
+                    setTimeout(function () {
+                        $(".scene05 .mengxiaomei").show();
+                        self.scene.s05.movie.mengxiaomei();
+                    }, 1500);
+
+                    setTimeout(function () {
+                        $(".scene05 .finished").show();
+                        self.scene.s05.movie.finished();
+
+                        _hmt.push(['_trackEvent', '跳转', '即将进入京东']);
+                    }, 1800);
+
+                    setTimeout(function () {
+                        //self.scene.s05.close();
+                        //self.scene.s06.open();
+                        location.href = self.jd;
+                    }, 4000)
                 },
                 xianqige: function () {
                     $(".scene05 .xianqige").show();
@@ -598,13 +733,25 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         width: 156,
                         height: 181
                     });
+                },
+                finished: function () {
+                    self.scene.s05.movie.timer[2] = frameplayer({
+                        target: $(".scene05 .finished"),
+                        total: 2,
+                        row: 2,
+                        loop: true,
+                        fps: 3,
+                        width: 593,
+                        height: 440
+                    });
                 }
             }
         },
 
         s06: {
             open: function () {
-
+                self.scene.s06.bindAciton();
+                self.swiper.slideTo(5);
             },
 
             close: function () {
@@ -612,7 +759,9 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             },
 
             bindAciton: function () {
-
+                $('.scene06').hammer().on("tap", function (e) {
+                    location.href = 'https://item.jd.com/1726224.html';
+                });
             },
 
             movie: function () {
@@ -682,7 +831,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
             '<div class="swiper-container">\
                 <div class="swiper-wrapper">\
                     <div class="swiper-slide scene01">\
-                        <div class="s1 ani jsfix" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="0.5s"></div>\
+                        <div class="s1 ani jsfix" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1s"></div>\
                         <div class="s2 ani jsfix" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1.0s"></div>\
                         <div class="button ani jsfix" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1.5s"></div>\
                         <div class="s4 ani jsfix" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="2.0s"></div>\
@@ -694,17 +843,17 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         <div class="mengxiaomei jsfix" data-mode="top-right" data-movie="yes"></div>\
                         <div class="btn-xianqige ani jsfix"></div>\
                         <div class="btn-mengxiaomei ani jsfix" data-mode="top-right"></div>\
-                        <div class="s5 ani jsfix" swiper-animate-effect="zoomIn" swiper-animate-duration="0.5s" swiper-animate-delay="0.5s"></div>\
-                        <div class="s6 ani jsfix" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1s"></div>\
+                        <div class="info jsfix" data-movie="yes"></div>\
                     </div>\
                     <div class="swiper-slide scene03">\
                         <div class="xianqige jsfix" data-movie="yes"></div>\
                         <div class="xianqige-words jsfix" data-mode="top-right"></div>\
-                        <div class="qi jsfix" data-mode="top-right"></div>\
+                        <div class="qi-box"><div class="qi jsfix ani" data-mode="top-right" swiper-animate-effect="tada" swiper-animate-duration="0.8s" swiper-animate-delay="0.5s"></div></div>\
                         <div class="mengxiaomei jsfix" data-movie="yes"></div>\
                         <div class="mengxiaomei-words jsfix" data-mode="top-right"></div>\
-                        <div class="meng jsfix" data-mode="top-right"></div>\
+                        <div class="meng-box"><div class="meng jsfix ani" data-mode="top-right" data-mode="top-right" swiper-animate-effect="tada" swiper-animate-duration="0.8s" swiper-animate-delay="0.5s"></div></div>\
                         <div class="s5 jsfix"><textarea maxlength="100"></textarea></div>\
+                        <div class="line jsfix"></div>\
                         <div class="button jsfix"></div>\
                         <div class="mask"><div class="voice-loading jsfix" data-movie="yes"></div></div>\
                     </div>\
@@ -723,12 +872,12 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                         </div>\
                     </div>\
                     <div class="swiper-slide scene05">\
-                        <div class="s1 ani jsfix" swiper-animate-effect="zoomIn" swiper-animate-duration="0.5s" swiper-animate-delay="1.5s"></div>\
+                        <div class="finished jsfix" data-movie="yes"></div>\
                         <div class="mengxiaomei jsfix" data-mode="top-right" data-movie="yes"></div>\
                         <div class="xianqige jsfix" data-movie="yes"></div>\
                     </div>\
                     <div class="swiper-slide scene06">\
-                        <div class="s1"><img src="img/scene06/jd.png"></div>\
+                        <div class="s1"><a href="https://item.jd.com/1726224.html"><img src="img/scene06/jd.png"></a></div>\
                         <div class="s2"><img src="img/scene06/youhui.png"></div>\
                         <div class="s3"><img src="img/scene06/button.png"></div>\
                     </div>\
@@ -753,14 +902,13 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
     })();
 
     // 分享
-    self.share = function (voiceId) {
+    self.share = function (voiceId, nickname) {
 
         $.ajax({
             type: 'post',
             //url: host + '/share/jssdk',
             //data: { url: window.location.href, m: 'getWxConfig' },
             url: 'http://www.tron-m.com/wx/jssdk?m=getWxConfig',
-            //data: { url: 'http://www.tron-m.com/frog/yanzhong/20170530/?voiceId=' + voiceId },
             dataType: 'json',
             success: function (args) {
                 ////////////
@@ -776,14 +924,23 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'createjs'], function ($, s
                 });
 
                 function callback(){
-                    if (voiceId != 'none') { self.scene.s05.open(); }
+                    if (voiceId != 'none') {
+                        self.scene.s05.open();
+                        _hmt.push(['_trackEvent', '分享', '音频转换后']);
+                    }
+                    else {
+                        _hmt.push(['_trackEvent', '分享', '音频转换前']);
+                    }
+
+                    
                 }
 
                 wx.ready(function () {
-                    var url = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile04/?man=' + (self.man ? 1 : 0) + '&voiceId=' + voiceId,
+                    //var url = self.baseUrl + '/?man=' + (self.man ? 1 : 0) + '&nickname=' + encodeURIComponent(nickname) + '&voiceId=' + voiceId,
+                    var url = self.baseUrl + '/?man=' + (self.man ? 1 : 0) + '&voiceId=' + voiceId,
                         title = '咸柠帮你说情话',
-                        desc = '咸柠帮你说情话',
-                        imgUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile04/img/main/bg.jpg'
+                        desc = '可以提高表白成功率哦 一般人我可不告诉TA',
+                        imgUrl = self.baseUrl + '/img/main/share.jpg';
 
                     wx.onMenuShareTimeline({
                         title: title, // 分享标题

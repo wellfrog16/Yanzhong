@@ -1,9 +1,13 @@
 ﻿// 剧本
 
-define(['jquery', 'script', 'tools', 'frameplayer', 'createjs'], function ($, script, tools, frameplayer) {
+define(['jquery', 'script', 'weixin', 'tools', 'frameplayer', 'createjs'], function ($, script, wx, tools, frameplayer) {
     var self = {}
 
+    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile13'
+
     self.open = function () {
+        _hmt.push(['_trackEvent', '浏览', '回放']);
+
         // loading界面        
         self.preload();
     }
@@ -60,6 +64,8 @@ define(['jquery', 'script', 'tools', 'frameplayer', 'createjs'], function ($, sc
           { 'src': 'replay/xianqige.png' },
         ]
 
+        loader.installPlugin(createjs.Sound);
+        loader.loadFile({ id: "myaudio", src: "http://www.tron-m.com/ifly/data/" + tools.getUrlParam('voiceId') + '.wav' });
         loader.on("progress", onProgress);
         loader.on("complete", onComplete);
         loader.loadManifest(source, true, 'img/');
@@ -67,11 +73,36 @@ define(['jquery', 'script', 'tools', 'frameplayer', 'createjs'], function ($, sc
 
         function onComplete(e) {
 
-            clearInterval(self.loadTimer);
-            $('.loading .text').fadeOut();
 
-            $('body').append(self.template.body);
-            self.scene.open();
+            $.ajax({
+                type: 'POST',
+                url: 'http://www.tron-m.com/ifly/api/userShare.do',
+                data: {
+                    'uuid': tools.getUrlParam('voiceId')
+                },
+                //contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                success: function (json) {
+                    //console.log(json);
+
+                    clearInterval(self.loadTimer);
+                    $('.loading .text').fadeOut();            
+
+                    self.share();
+                    self.scene.open(json.result.userInfo);
+
+                },
+                error: function (xhr, textStatus) {
+                    console.log('错误')
+                    //console.log(xhr)
+                    //console.log(textStatus)
+                },
+                complete: function () {
+                    console.log('结束')
+                },
+                dataType: 'json'
+            });
+
         }
 
         function onProgress(e) {
@@ -83,51 +114,162 @@ define(['jquery', 'script', 'tools', 'frameplayer', 'createjs'], function ($, sc
         }
     }
 
-    self.scene = {
-        open: function () {
-            $('.loading').fadeOut(function () {
+    self.playing = false;
 
+    self.scene = {
+        open: function (userInfo) {
+            $('.loading').fadeOut(function () {
+                $('body').append(self.template.body);
+
+                if (tools.getUrlParam('man') == 1) { $('.replay .xianqige').show(); }
+                else { $('.replay .mengxiaomei').show(); }
+
+                // 取昵称
+                $('.replay .nickname').text(userInfo.nickname)
+
+                self.fixPosition();
+
+                $('.replay').fadeIn();
+
+                self.scene.bindAction();
+                self.scene.movie.play();
             });
         },
 
         close: function () {
-
+            clearInterval(self.scene.movie.timer[0]);
         },
 
         bindAction: function () {
+            $('.replay .audio-button').hammer().on("tap", function (e) {
 
+                if (self.playing) { return }
+                //console.log('播放声音')
+
+                self.playing = true;
+
+                //$('audio')[0].play();
+                $('.replay .audio-button').removeClass('audio-button-play').addClass('audio-button-pause');
+                $('.replay .audio-button').addClass('audio-rotate');
+                var cc = createjs.Sound.play("myaudio", { loop: 0 });
+
+                cc.on("complete", function () {
+                    $('.replay .audio-button').removeClass('audio-button-pause').addClass('audio-button-play');
+                    $('.replay .audio-button').removeClass('audio-rotate');
+                    $('.replay .audio-button').css('transform', 'rotate(0deg)');
+                    self.playing = false;
+                }, this);
+            });
+
+            $('.replay .button').hammer().on("tap", function (e) {
+                self.scene.close();
+                $('.replay').remove();
+                script.open();
+            });
         },
 
         movie: {
-            timer: [null, null],
+            timer: [null],
             play: function () {
+                self.scene.movie.sound();
 
-                self.scene.s05.movie.mengxiaomei();
+            },
 
-                setTimeout(function () {
-                    self.scene.s05.movie.xianqige();
-                }, 1000)
+            sound: function () {
+                self.scene.movie.timer[0] = frameplayer({
+                    target: $(".replay .audio-sound"),
+                    total: 2,
+                    row: 1,
+                    loop: true,
+                    fps: 3,
+                    width: 549,
+                    height: 116
+                });
             }
         }
     }
 
 
+    // 坐标修正
+    self.fixPosition = function () {
+
+        var scaleNum = document.documentElement.clientWidth / 640;
+        var ele = $('.jsfix');
+
+        ele.each(function () {
+            var o = $(this);
+            var mode = o.attr('data-mode');
+            var isMovie = o.attr('data-movie') || 'no';
+
+            if (isMovie == 'no') {
+                o.css({
+                    'width': scaleNum * parseInt(o.css('width')),
+                    'height': scaleNum * parseInt(o.css('height')),
+                    'line-height': scaleNum * parseInt(o.css('line-height')) + 'px'
+                });
+            }
+
+            switch (mode) {
+
+                case 'top-right':
+                    o.css({
+                        'top': scaleNum * parseInt(o.css('top')),
+                        'right': scaleNum * parseInt(o.css('right'))
+                    });
+                    break;
+
+                case 'bottom-left':
+                    o.css({
+                        'bottom': scaleNum * parseInt(o.css('bottom')),
+                        'left': scaleNum * parseInt(o.css('left'))
+                    });
+                    break;
+
+                case 'bottom-right':
+                    o.css({
+                        'bottom': scaleNum * parseInt(o.css('bottom')),
+                        'right': scaleNum * parseInt(o.css('right'))
+                    });
+                    break;
+
+
+                default:
+                    o.css({
+                        'top': scaleNum * parseInt(o.css('top')),
+                        'left': scaleNum * parseInt(o.css('left'))
+                    });
+                    break;
+            }
+        });
+    }
+
 
     self.template = {
         loading: '<div class="loading"><div class="body"><div class="circle"><img src="img/loading/bottle.png" ></div><div class="text"></div></div></div>',
-        body: '<div class="replay"><div class="char"><img src="img/replay/xianqige.png"></div></div>'
+        body: '<div class="replay">\
+                <div class="xianqige jsfix"></div>\
+                <div class="mengxiaomei jsfix"></div>\
+                <div class="audio-bg jsfix"></div>\
+                <div class="audio-words jsfix"></div>\
+                <div class="nickname jsfix"></div>\
+                <div class="audio-sound jsfix" data-movie="yes"></div>\
+                <div class="audio-button-play audio-button jsfix"></div>\
+                <div class="button jsfix"></div>\
+            </div>'
     }
 
 
 
     // 分享
-    self.share = function (voiceId) {
+    self.share = function () {
+
+        //var s = self.baseUrl + '/?man=' + tools.getUrlParam('man') + '&nickname=' + tools.getUrlParam('nickname') + '&voiceId=' + tools.getUrlParam('voiceId');
+
         $.ajax({
             type: 'post',
-            //url: host + '/share/jssdk',
-            //data: { url: window.location.href, m: 'getWxConfig' },
+            //url: 'http://www.tron-m.com/wx/jssdk',
+            //data: { url: location.href, m: 'getWxConfig' },
             url: 'http://www.tron-m.com/wx/jssdk?m=getWxConfig',
-            //data: { url: 'http://www.tron-m.com/frog/yanzhong/20170530/?voiceId=' + voiceId },
             dataType: 'json',
             success: function (args) {
                 ////////////
@@ -143,14 +285,16 @@ define(['jquery', 'script', 'tools', 'frameplayer', 'createjs'], function ($, sc
                 });
 
                 function callback() {
-                    if (voiceId != 'none') { self.scene.s05.open(); }
+                    _hmt.push(['_trackEvent', '分享', '分享了回放']);
                 }
 
+
                 wx.ready(function () {
-                    var url = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile04/?man=' + (self.man ? 1 : 0) + '&voiceId=' + voiceId,
+                    //var url = self.baseUrl + '/?man=' + tools.getUrlParam('man') + '&nickname=' + tools.getUrlParam('nickname') + '&voiceId=' + tools.getUrlParam('voiceId'),
+                    var url = self.baseUrl + '/?man=' + tools.getUrlParam('man') + '&voiceId=' + tools.getUrlParam('voiceId'),
                         title = '咸柠帮你说情话',
-                        desc = '咸柠帮你说情话',
-                        imgUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile04/img/main/bg.jpg'
+                        desc = '可以提高表白成功率哦 一般人我可不告诉TA',
+                        imgUrl = self.baseUrl + '/img/main/share.jpg'
 
                     wx.onMenuShareTimeline({
                         title: title, // 分享标题
@@ -227,6 +371,7 @@ define(['jquery', 'script', 'tools', 'frameplayer', 'createjs'], function ($, sc
 
                 wx.error(function (res) {
                     console.log("wx has error:" + res);
+                    console.log(res);
                 });
             }
         });

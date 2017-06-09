@@ -44,10 +44,12 @@ require(["jquery", 'script', 'replay', 'tools'], function ($, script, replay, to
         e.preventDefault();
     });
 
+    //replay.open();
+
     var vid = tools.getUrlParam('voiceId');
 
-    if (vid) {
-        replay.open();
+    if (vid && vid != 'none') {
+        replay.open();        
     }
     else {
         script.open();

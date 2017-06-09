@@ -44,8 +44,11 @@ img {
     background: #333;
     color: #fff;
     text-align: center;
-    line-height: 100vh;
-    font-size: 20vh;
+    font-size: 16px;
+  }
+  .block img {
+    margin: 12% 0 2% 0;
+    width: 40%;
   }
 }
 html,
@@ -169,6 +172,21 @@ body > .audio {
   transform-origin: right top;
   display: none;
 }
+.scene02 {
+  /*.s5 {
+        .absolute-box(544px, 366px, 165px, 48px);
+        background-image:url(../img/scene02/info-bg.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .s6 {
+        .absolute-box(444px, 159px, 219px, 96px);
+        background-image:url(../img/scene02/info-words.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }*/
+}
 .scene02 .xianqige {
   width: 199px;
   height: 289px;
@@ -211,25 +229,16 @@ body > .audio {
   background-repeat: no-repeat;
   background-size: contain;
 }
-.scene02 .s5 {
-  width: 544px;
-  height: 366px;
+.scene02 .info {
+  width: 640px;
+  height: 388px;
   position: absolute;
-  top: 165px;
-  left: 48px;
-  background-image: url(../img/scene02/info-bg.png);
+  top: 125px;
+  left: 0px;
+  background-image: url(../img/scene02/info.png);
   background-repeat: no-repeat;
   background-size: contain;
-}
-.scene02 .s6 {
-  width: 444px;
-  height: 159px;
-  position: absolute;
-  top: 219px;
-  left: 96px;
-  background-image: url(../img/scene02/info-words.png);
-  background-repeat: no-repeat;
-  background-size: contain;
+  transform-origin: 0 0 0;
 }
 .scene03 .xianqige {
   width: 232px;
@@ -284,7 +293,6 @@ body > .audio {
   background-image: url(../img/scene03/qi.png);
   background-repeat: no-repeat;
   background-size: contain;
-  display: none;
 }
 .scene03 .meng {
   position: absolute;
@@ -295,6 +303,9 @@ body > .audio {
   background-image: url(../img/scene03/meng.png);
   background-repeat: no-repeat;
   background-size: contain;
+}
+.scene03 .qi-box,
+.scene03 .meng-box {
   display: none;
 }
 .scene03 .namemovedown {
@@ -310,7 +321,7 @@ body > .audio {
   left: 50px;
   background-image: url(../img/scene03/input-bg-tips.png);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   padding: 18px;
 }
 .scene03 .s5 textarea {
@@ -322,6 +333,14 @@ body > .audio {
   font-size: 16px;
   line-height: 16px;
   outline: none;
+}
+.scene03 .line {
+  width: 4px;
+  height: 36px;
+  position: absolute;
+  top: 558px;
+  left: 450px;
+  background-color: #ed7d31;
 }
 .scene03 .button {
   width: 416px;
@@ -365,8 +384,8 @@ body > .audio {
   background-size: contain;
 }
 .scene04 .audio-sound {
-  width: 538px;
-  height: 115px;
+  width: 549px;
+  height: 116px;
   position: absolute;
   top: 180px;
   left: 44px;
@@ -379,7 +398,7 @@ body > .audio {
   height: 100px;
   position: absolute;
   top: 187px;
-  left: 248px;
+  left: 268px;
   background-image: url(../img/scene04/play.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -389,7 +408,7 @@ body > .audio {
   height: 100px;
   position: absolute;
   top: 187px;
-  left: 248px;
+  left: 268px;
   background-image: url(../img/scene04/pause.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -481,7 +500,7 @@ body > .audio {
   background-repeat: no-repeat;
   transform-origin: right top;
 }
-.scene05 .s1 {
+.scene05 .finished {
   width: 593px;
   height: 440px;
   position: absolute;
@@ -490,6 +509,8 @@ body > .audio {
   background-image: url(../img/scene05/finished.png);
   background-repeat: no-repeat;
   background-size: contain;
+  transform-origin: 0 0 0;
+  display: none;
 }
 .scene05 .xianqige {
   width: 640px;
@@ -513,6 +534,7 @@ body > .audio {
   background-repeat: no-repeat;
   transform-origin: right top;
   background-size: contain;
+  display: none;
 }
 .scene06 > div {
   text-align: center;
@@ -529,12 +551,101 @@ body > .audio {
   margin-top: 5vh;
   width: 40%;
 }
-.replay .char {
-  text-align: center;
-  margin-top: 10vh;
+.replay {
+  display: none;
 }
-.replay .char img {
-  width: 70%;
+.replay .xianqige {
+  width: 512px;
+  height: 459px;
+  position: absolute;
+  top: 128px;
+  left: 63px;
+  background-image: url(../img/replay/xianqige.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: none;
+}
+.replay .mengxiaomei {
+  width: 430px;
+  height: 391px;
+  position: absolute;
+  top: 102px;
+  left: 100px;
+  background-image: url(../img/replay/mengxiaomei.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: none;
+}
+.replay .audio-bg {
+  width: 581px;
+  height: 362px;
+  position: absolute;
+  top: 375px;
+  left: 24px;
+  background-image: url(../img/scene01/info-bg.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.replay .audio-words {
+  width: 447px;
+  height: 59px;
+  position: absolute;
+  top: 427px;
+  left: 90px;
+  background-image: url(../img/replay/words.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.replay .audio-sound {
+  width: 549px;
+  height: 116px;
+  position: absolute;
+  top: 510px;
+  left: 35px;
+  background-image: url(../img/scene04/audio-sound.png);
+  background-repeat: no-repeat;
+  transform-origin: 0px 0px 0px;
+}
+.replay .audio-button-play {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 517px;
+  left: 260px;
+  background-image: url(../img/scene04/play.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.replay .audio-button-pause {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 187px;
+  left: 260px;
+  background-image: url(../img/scene04/pause.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.replay .audio-rotate {
+  animation: playRotate 5s linear 0s infinite normal;
+}
+.replay .nickname {
+  width: 110px;
+  height: 30px;
+  position: absolute;
+  top: 450px;
+  left: 152px;
+  text-align: center;
+}
+.replay .button {
+  width: 263px;
+  height: 110px;
+  position: absolute;
+  top: 828px;
+  left: 180px;
+  background-image: url(../img/replay/button.png);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 @keyframes playRotate {
   0% {
@@ -552,3 +663,7 @@ body > .audio {
     margin-top: 0vh;
   }
 }
+/*@keyframes kf-inputbg {
+    0% {background-position-y: 0;}
+    50% {background-position-y: 100%;}
+}*/
