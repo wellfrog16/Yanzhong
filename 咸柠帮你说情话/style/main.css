@@ -253,8 +253,8 @@ body > .audio {
 }
 .scene03 .xianqige-words {
   position: absolute;
-  width: 301px;
-  height: 134px;
+  width: 320px;
+  height: 132px;
   top: 224px;
   right: 59px;
   background-image: url(../img/scene03/xianqige-words.png);
@@ -275,8 +275,8 @@ body > .audio {
 }
 .scene03 .mengxiaomei-words {
   position: absolute;
-  width: 296px;
-  height: 139px;
+  width: 321px;
+  height: 130px;
   top: 212px;
   right: 56px;
   background-image: url(../img/scene03/mengxiaomei-words.png);
@@ -286,20 +286,20 @@ body > .audio {
 }
 .scene03 .qi {
   position: absolute;
-  width: 65px;
-  height: 62px;
-  top: 224px;
-  right: 120px;
+  width: 48px;
+  height: 47px;
+  top: 303px;
+  right: 277px;
   background-image: url(../img/scene03/qi.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
 .scene03 .meng {
   position: absolute;
-  width: 67px;
-  height: 66px;
-  top: 212px;
-  right: 172px;
+  width: 51px;
+  height: 49px;
+  top: 290px;
+  right: 328px;
   background-image: url(../img/scene03/meng.png);
   background-repeat: no-repeat;
   background-size: contain;
@@ -397,11 +397,13 @@ body > .audio {
   width: 100px;
   height: 100px;
   position: absolute;
-  top: 187px;
-  left: 268px;
+  top: 198px;
+  left: 281px;
   background-image: url(../img/scene04/play.png);
   background-repeat: no-repeat;
   background-size: cover;
+  transform-origin: center;
+  animation: kf-btnplay 1500ms ease infinite;
 }
 .scene04 .audio-button-pause {
   width: 100px;
@@ -431,8 +433,8 @@ body > .audio {
   width: 364px;
   height: 331px;
   position: absolute;
-  top: 475px;
-  left: 145px;
+  top: 445px;
+  left: 132px;
   background-image: url(../img/scene04/mengxiaomei.png);
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
@@ -455,6 +457,16 @@ body > .audio {
   top: 828px;
   right: 65px;
   background-image: url(../img/scene04/button-share.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.scene04 .bottle {
+  position: absolute;
+  width: 122px;
+  height: 155px;
+  top: 623px;
+  right: 83px;
+  background-image: url(../img/scene04/bottle.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -536,20 +548,43 @@ body > .audio {
   background-size: contain;
   display: none;
 }
-.scene06 > div {
+.scene06 .two {
+  position: absolute;
+  width: 400px;
+  height: 267px;
+  top: 181px;
+  left: 108px;
+  background-image: url(../img/scene01/two.png);
+  transform-origin: 0 0 0;
+  z-index: 1;
+}
+.scene06 .youhui {
+  position: absolute;
+  width: 541px;
+  height: 231px;
+  top: 367px;
+  left: 48px;
+  background-size: contain;
+  background-image: url(../img/scene06/youhui.png);
+}
+.scene06 .words {
+  position: absolute;
+  width: 640px;
+  height: 30px;
+  top: 635px;
+  left: 0px;
   text-align: center;
+  color: #7d7d7d;
+  font-size: 16px;
 }
-.scene06 .s1 img {
-  margin-top: 20vh;
-  width: 35%;
-}
-.scene06 .s2 img {
-  margin-top: 5vh;
-  width: 80%;
-}
-.scene06 .s3 img {
-  margin-top: 5vh;
-  width: 40%;
+.scene06 .button {
+  position: absolute;
+  width: 280px;
+  height: 114px;
+  top: 828px;
+  left: 180px;
+  background-size: contain;
+  background-image: url(../img/scene06/button.png);
 }
 .replay {
   display: none;
@@ -615,6 +650,8 @@ body > .audio {
   background-image: url(../img/scene04/play.png);
   background-repeat: no-repeat;
   background-size: cover;
+  transform-origin: center;
+  animation: kf-btnplay 1500ms ease infinite;
 }
 .replay .audio-button-pause {
   width: 100px;
@@ -630,12 +667,15 @@ body > .audio {
   animation: playRotate 5s linear 0s infinite normal;
 }
 .replay .nickname {
-  width: 110px;
+  width: 120px;
   height: 30px;
   position: absolute;
   top: 450px;
-  left: 152px;
+  left: 147px;
   text-align: center;
+  color: #ecc409;
+  font-weight: bold;
+  font-size: 16px;
 }
 .replay .button {
   width: 263px;
@@ -663,7 +703,13 @@ body > .audio {
     margin-top: 0vh;
   }
 }
-/*@keyframes kf-inputbg {
-    0% {background-position-y: 0;}
-    50% {background-position-y: 100%;}
-}*/
+@keyframes kf-btnplay {
+  from {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}

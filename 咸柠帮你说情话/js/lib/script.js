@@ -6,7 +6,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
     self.code = null;
     self.user = null;
 
-    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile13'
+    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile18'
     self.jd = 'https://item.jd.com/1726224.html'
 
     self.open = function () {
@@ -246,7 +246,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
             },
 
             close: function () {
-                clearInterval(self.scene.s01.movie.timer[0]);                
+                clearInterval(self.scene.s01.movie.timer[0]);
             },
 
             bindAciton: function () {
@@ -257,6 +257,23 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                     self.scene.s01.close();
                     self.scene.s02.open();
                 });
+
+                var effect = 'tada';
+
+                $('.scene01 .s5').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+
+                    $(this).removeClass('ani fadeInUp animated ' + effect);
+                    $('.scene01 .s4').removeClass('ani fadeInUp animated ' + effect).addClass('animated ' + effect)
+                });
+
+                $('.scene01 .s4').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+
+                    $(this).removeClass('ani fadeInUp animated ' + effect);
+                    $('.scene01 .s5').removeClass('ani fadeInUp animated ' + effect).addClass('animated ' + effect)
+                });
+
+
+                //$('.scene01 .s5')
             },
 
             movie: {
@@ -376,6 +393,8 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                 $('.scene03 .mengxiaomei, .scene03 .meng-box, .scene03 .mengxiaomei-words').hide();
                 $('.scene03 .xianqige, .scene03 .qi-box, .scene03 .xianqige-words').hide();
                 $('.scene03 .s5').css('background-image', 'url(img/scene03/input-bg-tips.png)');
+
+                $('body').attr('data-switch', 'off');
             },
 
             bindAciton: function () {
@@ -387,7 +406,16 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                     clearInterval(self.scene.s03.movie.timer[2]);
                     $('.scene03 .line').hide();
                     $('.scene03 textarea').focus();
-                })
+                });
+
+                //
+                $('.scene03 textarea').on('focus', function () {
+                    $('body').attr('data-switch', 'on');
+                });
+
+                $('.scene03 textarea').on('blur', function () {
+                    $('body').attr('data-switch', 'off');
+                });
 
                 $('.scene03 .button').hammer().on("tap", function (e) {
 
@@ -702,13 +730,13 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                         $(".scene05 .finished").show();
                         self.scene.s05.movie.finished();
 
-                        _hmt.push(['_trackEvent', '跳转', '即将进入京东']);
+                        //_hmt.push(['_trackEvent', '跳转', '即将进入京东']);
                     }, 1800);
 
                     setTimeout(function () {
-                        //self.scene.s05.close();
-                        //self.scene.s06.open();
-                        location.href = self.jd;
+                        self.scene.s05.close();
+                        self.scene.s06.open();
+                        //location.href = self.jd;
                     }, 4000)
                 },
                 xianqige: function () {
@@ -751,21 +779,39 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
         s06: {
             open: function () {
                 self.scene.s06.bindAciton();
+                self.scene.s06.movie.play();
                 self.swiper.slideTo(5);
             },
 
             close: function () {
-
+                clearInterval(self.scene.s06.movie.timer[0]);
             },
 
             bindAciton: function () {
-                $('.scene06').hammer().on("tap", function (e) {
-                    location.href = 'https://item.jd.com/1726224.html';
+                $('.scene06 .button').hammer().on("tap", function (e) {
+
+                    _hmt.push(['_trackEvent', '跳转', '即将进入京东']);
+                    setTimeout(function () { location.href = 'https://item.jd.com/1726224.html'; }, 1000)                    
                 });
             },
 
-            movie: function () {
-
+            movie: {
+                timer: [null],
+                play: function () {
+                    self.scene.s06.movie.two();
+                },
+                two: function () {
+                    $(".scene06 .two").show();
+                    self.scene.s06.movie.timer[0] = frameplayer({
+                        target: $(".scene06 .two"),
+                        total: 3,
+                        row: 1,
+                        loop: true,
+                        fps: 4,
+                        width: 400,
+                        height: 267
+                    });
+                }
             }
         }
     }
@@ -834,8 +880,8 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                         <div class="s1 ani jsfix" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1s"></div>\
                         <div class="s2 ani jsfix" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1.0s"></div>\
                         <div class="button ani jsfix" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1.5s"></div>\
-                        <div class="s4 ani jsfix" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="2.0s"></div>\
-                        <div class="s5 ani jsfix" data-mode="top-right" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="2.2s"></div>\
+                        <div class="s4 ani jsfix" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="1.6s"></div>\
+                        <div class="s5 ani jsfix" data-mode="top-right" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="1.8s"></div>\
                         <div class="two jsfix" data-mode="top-right" data-movie="yes"></div>\
                     </div>\
                     <div class="swiper-slide scene02">\
@@ -865,6 +911,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                         <div class="mengxiaomei jsfix" data-movie="yes"></div>\
                         <div class="btn-retry jsfix"></div>\
                         <div class="btn-share jsfix" data-mode="top-right"></div>\
+                        <div class="bottle jsfix" data-mode="top-right"></div>\
                         <div class="share">\
                             <div class="light jsfix" data-mode="top-right" data-movie="yes"></div>\
                             <div class="share-words jsfix"></div>\
@@ -877,9 +924,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                         <div class="xianqige jsfix" data-movie="yes"></div>\
                     </div>\
                     <div class="swiper-slide scene06">\
-                        <div class="s1"><a href="https://item.jd.com/1726224.html"><img src="img/scene06/jd.png"></a></div>\
-                        <div class="s2"><img src="img/scene06/youhui.png"></div>\
-                        <div class="s3"><img src="img/scene06/button.png"></div>\
+                        <div class="two jsfix" data-movie="yes"></div>\
+                        <div class="youhui jsfix"></div>\
+                        <div class="words jsfix">点击领取京东优惠券</div>\
+                        <div class="button jsfix"></div>\
                     </div>\
                 </div>\
             </div>'

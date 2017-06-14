@@ -3,7 +3,7 @@
 define(['jquery', 'script', 'weixin', 'tools', 'frameplayer', 'createjs'], function ($, script, wx, tools, frameplayer) {
     var self = {}
 
-    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile13'
+    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile18'
 
     self.open = function () {
         _hmt.push(['_trackEvent', '浏览', '回放']);
@@ -72,6 +72,12 @@ define(['jquery', 'script', 'weixin', 'tools', 'frameplayer', 'createjs'], funct
 
 
         function onComplete(e) {
+
+            //clearInterval(self.loadTimer);
+            //$('.loading .text').fadeOut();
+
+            //self.scene.open('');
+            //return
 
 
             $.ajax({

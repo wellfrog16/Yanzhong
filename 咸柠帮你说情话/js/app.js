@@ -39,9 +39,13 @@ require(["jquery", 'script', 'replay', 'tools'], function ($, script, replay, to
         e.preventDefault();
     });
 
+    $('body').attr('data-switch', 'off');
      
     $("body").on("touchstart", function (e) {
-        e.preventDefault();
+
+        if ($('body').attr('data-switch') == 'off') {
+            e.preventDefault();
+        }
     });
 
     //replay.open();

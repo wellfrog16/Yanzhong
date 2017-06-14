@@ -236,8 +236,8 @@ body {
 
     .xianqige-words {
         position:absolute;
-        width:301px;
-        height:134px;
+        width:320px;
+        height:132px;
         top:224px;
         right:59px;
         background-image:url(../img/scene03/xianqige-words.png);
@@ -256,8 +256,8 @@ body {
 
     .mengxiaomei-words {
         position:absolute;
-        width:296px;
-        height:139px;
+        width:321px;
+        height:130px;
         top:212px;
         right:56px;
         background-image:url(../img/scene03/mengxiaomei-words.png);
@@ -268,10 +268,10 @@ body {
 
     .qi {
         position:absolute;
-        width:65px;
-        height:62px;
-        top:224px;
-        right:120px;
+        width:48px;
+        height:47px;
+        top:303px;
+        right:277px;
         background-image:url(../img/scene03/qi.png);
         background-repeat:no-repeat;
         background-size:contain;
@@ -281,10 +281,10 @@ body {
 
     .meng {
         position:absolute;
-        width:67px;
-        height:66px;
-        top:212px;
-        right:172px;
+        width:51px;
+        height:49px;
+        top:290px;
+        right:328px;
         background-image:url(../img/scene03/meng.png);
         background-repeat:no-repeat;
         background-size:contain;
@@ -366,10 +366,14 @@ body {
     }
 
     .audio-button-play {
-        .absolute-box(100px, 100px, 187px, 268px);
+        //.absolute-box(100px, 100px, 187px, 268px);
+        .absolute-box(100px, 100px, 198px, 281px);
         background-image:url(../img/scene04/play.png);
         background-repeat:no-repeat;
         background-size:cover;
+        transform-origin: center;
+
+        animation:kf-btnplay 1500ms ease infinite;
     }
 
     .audio-button-pause {
@@ -392,7 +396,7 @@ body {
     }
 
     .mengxiaomei {
-        .absolute-box(364px, 331px, 475px, 145px);
+        .absolute-box(364px, 331px, 445px, 132px);
         background-image:url(../img/scene04/mengxiaomei.png);
         background-repeat:no-repeat;
         transform-origin: 0px 0px 0px;
@@ -413,6 +417,17 @@ body {
         top:828px;
         right:65px;
         background-image:url(../img/scene04/button-share.png);
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+
+    .bottle {
+        position:absolute;
+        width:122px;
+        height:155px;
+        top:623px;
+        right:83px;
+        background-image:url(../img/scene04/bottle.png);
         background-repeat:no-repeat;
         background-size:contain;
     }
@@ -486,23 +501,47 @@ body {
 }
 
 .scene06 {
-    >div {
+
+    .two {
+        position:absolute;
+        width:400px;
+        height:267px;
+        top:181px;
+        left:108px;
+        background-image:url(../img/scene01/two.png);
+        transform-origin:0 0 0;
+        z-index:1;
+    }
+
+    .youhui {
+        position:absolute;
+        width:541px;
+        height:231px;
+        top:367px;
+        left:48px;
+        background-size:contain;
+        background-image:url(../img/scene06/youhui.png);
+    }
+
+    .words {
+        position:absolute;
+        width:640px;
+        height:30px;
+        top:635px;
+        left:0px;
         text-align:center;
+        color:#7d7d7d;
+        font-size:16px;
     }
 
-    .s1 img {
-        margin-top:20vh;
-        width:35%;
-    }
-
-    .s2 img {
-        margin-top:5vh;
-        width:80%;
-    }
-
-    .s3 img {
-        margin-top:5vh;
-        width:40%;
+    .button {
+        position:absolute;
+        width:280px;
+        height:114px;
+        top:828px;
+        left:180px;
+        background-size:contain;
+        background-image:url(../img/scene06/button.png);
     }
 }
 
@@ -553,6 +592,9 @@ body {
         background-image:url(../img/scene04/play.png);
         background-repeat:no-repeat;
         background-size:cover;
+        transform-origin: center;
+
+        animation:kf-btnplay 1500ms ease infinite;
     }
 
     .audio-button-pause {
@@ -567,8 +609,12 @@ body {
     }
 
     .nickname {
-        .absolute-box(110px, 30px, 450px, 152px);
+        .absolute-box(120px, 30px, 450px, 147px);
         text-align:center;
+        color:#ecc409;
+        font-weight:bold;
+        font-size:16px;
+
         //border:1px solid red;
     }
 
@@ -591,7 +637,7 @@ body {
     to {margin-top:0vh;}
 }
 
-/*@keyframes kf-inputbg {
-    0% {background-position-y: 0;}
-    50% {background-position-y: 100%;}
-}*/
+@keyframes kf-btnplay {
+    from { transform: scale(0.8); opacity:1; }
+    to {transform: scale(1.2); opacity:0;}
+}
