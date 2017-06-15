@@ -6,13 +6,21 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
     self.code = null;
     self.user = null;
 
-    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile18'
+    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile19'
     self.jd = 'https://item.jd.com/1726224.html'
 
     self.open = function () {
 
         //self.preload();
         //return
+        //加载完毕播放
+        //document.addEventListener("WeixinJSBridgeReady", function () {
+        //    $('#shake')[0].play();
+            
+        //}, false);
+
+        //alert(0)
+
 
         self.authorization();
     }
@@ -174,6 +182,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
           { 'src': 'scene06/youhui.png' }
         ]
 
+        loader.installPlugin(createjs.Sound);
+        loader.loadFile({ id: "boy", src: 'audio/boy.wav' });
+        loader.loadFile({ id: "girl", src: 'audio/girl.mp3' });
+        loader.loadFile({ id: "button", src: 'audio/button.mp3' });
         loader.on("progress", onProgress);
         loader.on("complete", onComplete);
         loader.loadManifest(source, true, 'img/');
@@ -254,8 +266,10 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                 else { self.scene.s01.inited = true; }
 
                 $('.scene01 .button, .scene01 .s4,.scene01 .s5').hammer().on("tap", function (e) {
-                    self.scene.s01.close();
-                    self.scene.s02.open();
+                    //$('#shake')[0].pause();
+                    createjs.Sound.play("button");
+                    self.scene.s01.close();                    
+                    self.scene.s02.open();                    
                 });
 
                 var effect = 'tada';
@@ -318,12 +332,14 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                 $('.scene02 .btn-mengxiaomei').hammer().on("tap", function (e) {
                     self.man = false;
                     $('.scene03 .mengxiaomei, .scene03 .mengxiaomei-words').show();
+                    createjs.Sound.play("girl");
                     self.scene.s02.close();
                     self.scene.s03.open();
                 });
 
                 $('.scene02 .btn-xianqige').hammer().on("tap", function (e) {
                     $('.scene03 .xianqige, .scene03 .xianqige-words').show();
+                    createjs.Sound.play("boy");
                     self.scene.s02.close();
                     self.scene.s03.open();
                 });
@@ -422,6 +438,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                     if ($('.scene03 textarea').val() == '') { return; }
 
                     $('.scene03 .mask').show();
+                    createjs.Sound.play("button");
                     self.scene.s03.movie.loading();
 
                     if (self.man) {
@@ -436,7 +453,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                         url: 'http://www.tron-m.com/ifly/api/tts.do',
                         data: JSON.stringify({
                             'userId': self.user.id,
-                            "speaker": self.man ? "xiaoxin" : 'yefang',
+                            "speaker": self.man ? "xiaofeng" : 'yefang',
                             "text": $('.scene03 textarea').val(),
                             "ssTempo": "",
                             "ssPitch": "",
