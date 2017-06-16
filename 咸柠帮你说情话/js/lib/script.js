@@ -82,7 +82,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                 error: function (xhr, textStatus) {
                     console.log('错误')
 
-                    location.href = self.baseUrl;
+                    //location.href = self.baseUrl;
                     //console.log(xhr)
                     //console.log(textStatus)
                 },
@@ -755,14 +755,14 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                         $(".scene05 .finished").show();
                         self.scene.s05.movie.finished();
 
-                        //_hmt.push(['_trackEvent', '跳转', '即将进入京东']);
+                        _hmt.push(['_trackEvent', '跳转', '即将进入京东']);
                     }, 1800);
 
                     setTimeout(function () {
-                        self.scene.s05.close();
-                        self.scene.s06.open();
-                        //location.href = self.jd;
-                    }, 4000)
+                        //self.scene.s05.close();
+                        //self.scene.s06.open();
+                        location.href = 'https://wqs.jd.com/event/promote/yanzhong/index.shtml';
+                    }, 3800)
                 },
                 xianqige: function () {
                     $(".scene05 .xianqige").show();
@@ -816,7 +816,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                 $('.scene06 .button').hammer().on("tap", function (e) {
 
                     _hmt.push(['_trackEvent', '跳转', '即将进入京东']);
-                    setTimeout(function () { location.href = 'https://item.jd.com/1726224.html'; }, 1000)                    
+                    setTimeout(function () { location.href = 'https://wqs.jd.com/event/promote/yanzhong/index.shtml'; }, 1000)
                 });
             },
 

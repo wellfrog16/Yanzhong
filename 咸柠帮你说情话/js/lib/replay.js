@@ -87,7 +87,6 @@ define(['jquery', 'script', 'weixin', 'tools', 'frameplayer', 'createjs'], funct
             //self.scene.open('');
             //return
 
-
             $.ajax({
                 type: 'POST',
                 url: 'http://www.tron-m.com/ifly/api/userShare.do',
@@ -108,6 +107,10 @@ define(['jquery', 'script', 'weixin', 'tools', 'frameplayer', 'createjs'], funct
                 },
                 error: function (xhr, textStatus) {
                     console.log('错误')
+
+                    alert('没有找到对应的声音');
+
+                    location.href = self.baseUrl;
                     //console.log(xhr)
                     //console.log(textStatus)
                 },
