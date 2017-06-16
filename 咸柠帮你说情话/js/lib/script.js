@@ -6,7 +6,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
     self.code = null;
     self.user = null;
 
-    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile19'
+    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile20'
     self.jd = 'https://item.jd.com/1726224.html'
 
     self.open = function () {
@@ -142,33 +142,41 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
         loader.maintainScriptOrder = true;
 
         var source = [
+            { 'src': 'main/landscape.png' },
+
           { 'src': 'scene01/bubble-biaobai.png' },
           { 'src': 'scene01/bubble-dashan.png' },
           { 'src': 'scene01/button-next.png' },
           { 'src': 'scene01/info-bg.png' },
           { 'src': 'scene01/info-words.png' },
+          { 'src': 'scene01/two.png' },
 
           { 'src': 'scene02/button-boy.png' },
           { 'src': 'scene02/button-girl.png' },
-          { 'src': 'scene02/info-bg.png' },
-          { 'src': 'scene02/info-words.png' },
+          { 'src': 'scene02/info.png' },
           { 'src': 'scene02/mengxiaomei.png' },
           { 'src': 'scene02/xianqige.png' },
 
           { 'src': 'scene03/button.png' },
-          { 'src': 'scene03/input-bg.png' },
           { 'src': 'scene03/input-bg-tips.png' },
+          { 'src': 'scene03/input-bg.png' },
           { 'src': 'scene03/loading.png' },
+          { 'src': 'scene03/meng.png' },
           { 'src': 'scene03/mengxiaomei-words.png' },
           { 'src': 'scene03/mengxiaomei.png' },
+          { 'src': 'scene03/qi.png' },
           { 'src': 'scene03/xianqige-words.png' },
           { 'src': 'scene03/xianqige.png' },
 
+          { 'src': 'scene04/audio-sound.png' },
           { 'src': 'scene04/audio.png' },
+          { 'src': 'scene04/bottle.png' },
           { 'src': 'scene04/button-retry.png' },
           { 'src': 'scene04/button-share.png' },
           { 'src': 'scene04/light.png' },
           { 'src': 'scene04/mengxiaomei.png' },
+          { 'src': 'scene04/pause.png' },
+          { 'src': 'scene04/play.png' },
           { 'src': 'scene04/share.png' },
           { 'src': 'scene04/two.png' },
           { 'src': 'scene04/xianqige.png' },
@@ -178,7 +186,6 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
           { 'src': 'scene05/walk.png' },
 
           { 'src': 'scene06/button.png' },
-          { 'src': 'scene06/jd.jpg' },
           { 'src': 'scene06/youhui.png' }
         ]
 
