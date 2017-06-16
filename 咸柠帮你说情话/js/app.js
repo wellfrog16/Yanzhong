@@ -1,6 +1,6 @@
 ﻿require.config(
 {
-    baseUrl: "js/lib",
+    baseUrl: "http://yanzhong16.oss-cn-shanghai.aliyuncs.com/js/lib",
     map: {
             '*': {
                 'css': 'css.min'

@@ -6,7 +6,8 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
     self.code = null;
     self.user = null;
 
-    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile20'
+    self.baseUrl = 'http://www.tron-m.com/yanzhong'
+    self.cdnUrl = 'http://yanzhong16.oss-cn-shanghai.aliyuncs.com/';
     self.jd = 'https://item.jd.com/1726224.html'
 
     self.open = function () {
@@ -113,7 +114,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
         ]
 
         loader.on("complete", onComplete);
-        loader.loadManifest(source, true, 'img/');
+        loader.loadManifest(source, true, self.cdnUrl + 'img/');
 
         function onComplete() {
             $('body').append(self.template.loading);
@@ -195,7 +196,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
         loader.loadFile({ id: "button", src: 'audio/button.mp3' });
         loader.on("progress", onProgress);
         loader.on("complete", onComplete);
-        loader.loadManifest(source, true, 'img/');
+        loader.loadManifest(source, true, self.cdnUrl + 'img/');
 
 
         function onComplete(e) {
@@ -415,7 +416,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                 $('.scene03 textarea').val('');
                 $('.scene03 .mengxiaomei, .scene03 .meng-box, .scene03 .mengxiaomei-words').hide();
                 $('.scene03 .xianqige, .scene03 .qi-box, .scene03 .xianqige-words').hide();
-                $('.scene03 .s5').css('background-image', 'url(img/scene03/input-bg-tips.png)');
+                $('.scene03 .s5').css('background-image', 'url(' + self.cdnUrl + 'img/scene03/input-bg-tips.png)');
 
                 $('body').attr('data-switch', 'off');
             },
@@ -425,7 +426,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                 else { self.scene.s03.inited = true; }
 
                 $('.scene03 .s5').hammer().on("tap", function () {
-                    $('.scene03 .s5').css('background-image', 'url(img/scene03/input-bg.png)');
+                    $('.scene03 .s5').css('background-image', 'url(' + self.cdnUrl + 'img/scene03/input-bg.png)');
                     clearInterval(self.scene.s03.movie.timer[2]);
                     $('.scene03 .line').hide();
                     $('.scene03 textarea').focus();
@@ -895,7 +896,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
 
 
     self.template = {
-        loading: '<div class="loading"><div class="body"><div class="circle"><img src="img/loading/bottle.png" ></div><div class="text"></div></div></div>',
+        loading: '<div class="loading"><div class="body"><div class="circle"><img src="' + self.cdnUrl + 'img/loading/bottle.png" ></div><div class="text"></div></div></div>',
         replay : '',
         swiper:
             '<div class="swiper-container">\
@@ -1012,7 +1013,7 @@ define(['jquery', 'swiper', 'weixin', 'frameplayer', 'tools', 'createjs'], funct
                     var url = self.baseUrl + '/?man=' + (self.man ? 1 : 0) + '&voiceId=' + voiceId,
                         title = '咸柠帮你说情话',
                         desc = '可以提高表白成功率哦 一般人我可不告诉TA',
-                        imgUrl = self.baseUrl + '/img/main/share.jpg';
+                        imgUrl = self.cdnUrl + 'img/main/share.jpg';
 
                     wx.onMenuShareTimeline({
                         title: title, // 分享标题

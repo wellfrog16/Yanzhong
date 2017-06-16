@@ -3,7 +3,8 @@
 define(['jquery', 'script', 'weixin', 'tools', 'frameplayer', 'createjs'], function ($, script, wx, tools, frameplayer) {
     var self = {}
 
-    self.baseUrl = 'http://www.tron-m.com/frog/yanzhong/20170602/mobile20'
+    self.baseUrl = 'http://www.tron-m.com/yanzhong';
+    self.cdnUrl = 'http://yanzhong16.oss-cn-shanghai.aliyuncs.com/';
 
     self.open = function () {
         _hmt.push(['_trackEvent', '浏览', '回放']);
@@ -75,7 +76,7 @@ define(['jquery', 'script', 'weixin', 'tools', 'frameplayer', 'createjs'], funct
         loader.loadFile({ id: "myaudio", src: "http://www.tron-m.com/ifly/data/" + tools.getUrlParam('voiceId') + '.wav' });
         loader.on("progress", onProgress);
         loader.on("complete", onComplete);
-        loader.loadManifest(source, true, 'img/');
+        loader.loadManifest(source, true, self.cdnUrl + 'img/');
 
 
         function onComplete(e) {
@@ -258,7 +259,7 @@ define(['jquery', 'script', 'weixin', 'tools', 'frameplayer', 'createjs'], funct
 
 
     self.template = {
-        loading: '<div class="loading"><div class="body"><div class="circle"><img src="img/loading/bottle.png" ></div><div class="text"></div></div></div>',
+        loading: '<div class="loading"><div class="body"><div class="circle"><img src="' + self.cdnUrl + 'img/loading/bottle.png" ></div><div class="text"></div></div></div>',
         body: '<div class="replay">\
                 <div class="xianqige jsfix"></div>\
                 <div class="mengxiaomei jsfix"></div>\
@@ -307,7 +308,7 @@ define(['jquery', 'script', 'weixin', 'tools', 'frameplayer', 'createjs'], funct
                     var url = self.baseUrl + '/?man=' + tools.getUrlParam('man') + '&voiceId=' + tools.getUrlParam('voiceId'),
                         title = '咸柠帮你说情话',
                         desc = '可以提高表白成功率哦 一般人我可不告诉TA',
-                        imgUrl = self.baseUrl + '/img/main/share.jpg'
+                        imgUrl = self.cdnUrl + 'img/main/share.jpg'
 
                     wx.onMenuShareTimeline({
                         title: title, // 分享标题

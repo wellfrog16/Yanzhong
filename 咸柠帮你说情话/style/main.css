@@ -61,7 +61,7 @@ body {
   background-color: #fff;
 }
 body {
-  background-image: url(../img/main/bg.jpg);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/main/bg.jpg');
   background-size: 100% auto;
   background-repeat: no-repeat;
 }
@@ -87,7 +87,7 @@ body > .audio {
 .loading .circle {
   width: 40vw;
   height: 40vw;
-  background-image: url('../img/loading/circle.png');
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/loading/circle.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -99,7 +99,7 @@ body > .audio {
   position: absolute;
   width: 230px;
   height: 49px;
-  background-image: url(../img/loading/text.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/loading/text.png');
   background-repeat: no-repeat;
   background-size: cover;
   transform-origin: 0px 0px 0px;
@@ -116,7 +116,7 @@ body > .audio {
   position: absolute;
   top: 257px;
   left: 24px;
-  background-image: url(../img/scene01/info-bg.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene01/info-bg.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -126,7 +126,7 @@ body > .audio {
   position: absolute;
   top: 338px;
   left: 60px;
-  background-image: url(../img/scene01/info-words.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene01/info-words.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -136,7 +136,7 @@ body > .audio {
   position: absolute;
   top: 828px;
   left: 99px;
-  background-image: url(../img/scene01/button-next.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene01/button-next.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -146,7 +146,7 @@ body > .audio {
   position: absolute;
   top: 678px;
   left: 104px;
-  background-image: url(../img/scene01/bubble-dashan.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene01/bubble-dashan.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -156,7 +156,7 @@ body > .audio {
   height: 124px;
   top: 678px;
   right: 95px;
-  background-image: url(../img/scene01/bubble-biaobai.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene01/bubble-biaobai.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -166,7 +166,7 @@ body > .audio {
   height: 267px;
   top: 108px;
   right: 70px;
-  background-image: url(../img/scene01/two.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene01/two.png');
   background-repeat: no-repeat;
   background-size: contain;
   transform-origin: right top;
@@ -179,7 +179,7 @@ body > .audio {
   top: 507px;
   left: 72px;
   transform-origin: 0px 0px 0px;
-  background-image: url(../img/scene02/xianqige.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene02/xianqige.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -189,7 +189,7 @@ body > .audio {
   height: 234px;
   top: 565px;
   right: 102px;
-  background-image: url(../img/scene02/mengxiaomei.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene02/mengxiaomei.png');
   background-repeat: no-repeat;
   background-size: contain;
   transform-origin: right top;
@@ -200,7 +200,7 @@ body > .audio {
   position: absolute;
   top: 828px;
   left: 40px;
-  background-image: url(../img/scene02/button-boy.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene02/button-boy.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -210,7 +210,7 @@ body > .audio {
   height: 111px;
   top: 828px;
   right: 40px;
-  background-image: url(../img/scene02/button-girl.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene02/button-girl.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -220,7 +220,7 @@ body > .audio {
   position: absolute;
   top: 125px;
   left: 0px;
-  background-image: url(../img/scene02/info.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene02/info.png');
   background-repeat: no-repeat;
   background-size: contain;
   transform-origin: 0 0 0;
@@ -231,7 +231,7 @@ body > .audio {
   position: absolute;
   top: 141px;
   left: 64px;
-  background-image: url(../img/scene03/xianqige.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene03/xianqige.png');
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
   display: none;
@@ -242,7 +242,7 @@ body > .audio {
   height: 132px;
   top: 224px;
   right: 59px;
-  background-image: url(../img/scene03/xianqige-words.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene03/xianqige-words.png');
   background-repeat: no-repeat;
   background-size: contain;
   display: none;
@@ -253,7 +253,7 @@ body > .audio {
   position: absolute;
   top: 157px;
   left: 80px;
-  background-image: url(../img/scene03/mengxiaomei.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene03/mengxiaomei.png');
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
   display: none;
@@ -264,7 +264,7 @@ body > .audio {
   height: 130px;
   top: 212px;
   right: 56px;
-  background-image: url(../img/scene03/mengxiaomei-words.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene03/mengxiaomei-words.png');
   background-repeat: no-repeat;
   background-size: contain;
   display: none;
@@ -275,7 +275,7 @@ body > .audio {
   height: 47px;
   top: 303px;
   right: 277px;
-  background-image: url(../img/scene03/qi.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene03/qi.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -285,7 +285,7 @@ body > .audio {
   height: 49px;
   top: 290px;
   right: 328px;
-  background-image: url(../img/scene03/meng.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene03/meng.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -304,7 +304,7 @@ body > .audio {
   position: absolute;
   top: 432px;
   left: 50px;
-  background-image: url(../img/scene03/input-bg-tips.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene03/input-bg-tips.png');
   background-repeat: no-repeat;
   background-size: cover;
   padding: 18px;
@@ -333,7 +333,7 @@ body > .audio {
   position: absolute;
   top: 828px;
   left: 113px;
-  background-image: url(../img/scene03/button.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene03/button.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -354,7 +354,7 @@ body > .audio {
   position: absolute;
   top: 25vh;
   left: 50px;
-  background-image: url(../img/scene03/loading.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene03/loading.png');
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
 }
@@ -364,7 +364,7 @@ body > .audio {
   position: absolute;
   top: 143px;
   left: 27px;
-  background-image: url(../img/scene04/audio.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/audio.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -374,7 +374,7 @@ body > .audio {
   position: absolute;
   top: 180px;
   left: 44px;
-  background-image: url(../img/scene04/audio-sound.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/audio-sound.png');
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
 }
@@ -384,7 +384,7 @@ body > .audio {
   position: absolute;
   top: 198px;
   left: 281px;
-  background-image: url(../img/scene04/play.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/play.png');
   background-repeat: no-repeat;
   background-size: cover;
   transform-origin: center;
@@ -396,7 +396,7 @@ body > .audio {
   position: absolute;
   top: 187px;
   left: 268px;
-  background-image: url(../img/scene04/pause.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/pause.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -409,7 +409,7 @@ body > .audio {
   position: absolute;
   top: 441px;
   left: 143px;
-  background-image: url(../img/scene04/xianqige.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/xianqige.png');
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
   display: none;
@@ -420,7 +420,7 @@ body > .audio {
   position: absolute;
   top: 445px;
   left: 132px;
-  background-image: url(../img/scene04/mengxiaomei.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/mengxiaomei.png');
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
   display: none;
@@ -431,7 +431,7 @@ body > .audio {
   position: absolute;
   top: 828px;
   left: 65px;
-  background-image: url(../img/scene04/button-retry.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/button-retry.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -441,7 +441,7 @@ body > .audio {
   height: 114px;
   top: 828px;
   right: 65px;
-  background-image: url(../img/scene04/button-share.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/button-share.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -451,7 +451,7 @@ body > .audio {
   height: 155px;
   top: 623px;
   right: 83px;
-  background-image: url(../img/scene04/bottle.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/bottle.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -472,7 +472,7 @@ body > .audio {
   position: absolute;
   top: 83px;
   left: 68px;
-  background-image: url(../img/scene04/share.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/share.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -482,7 +482,7 @@ body > .audio {
   position: absolute;
   top: 180px;
   left: 108px;
-  background-image: url(../img/scene04/two.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/two.png');
   background-repeat: no-repeat;
   background-size: contain;
   transform-origin: 0;
@@ -493,7 +493,7 @@ body > .audio {
   height: 600px;
   top: 0px;
   right: 0px;
-  background-image: url(../img/scene04/light.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/light.png');
   background-repeat: no-repeat;
   transform-origin: right top;
 }
@@ -503,7 +503,7 @@ body > .audio {
   position: absolute;
   top: 85px;
   left: 28px;
-  background-image: url(../img/scene05/finished.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene05/finished.png');
   background-repeat: no-repeat;
   background-size: contain;
   transform-origin: 0 0 0;
@@ -515,7 +515,7 @@ body > .audio {
   position: absolute;
   top: 470px;
   left: 0px;
-  background-image: url(../img/scene05/walk.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene05/walk.png');
   background-repeat: no-repeat;
   background-size: contain;
   transform-origin: 0;
@@ -527,7 +527,7 @@ body > .audio {
   height: 181px;
   top: 582px;
   right: 72px;
-  background-image: url(../img/scene05/mengxiaomei.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene05/mengxiaomei.png');
   background-repeat: no-repeat;
   transform-origin: right top;
   background-size: contain;
@@ -539,7 +539,7 @@ body > .audio {
   height: 267px;
   top: 181px;
   left: 108px;
-  background-image: url(../img/scene01/two.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene01/two.png');
   transform-origin: 0 0 0;
   z-index: 1;
 }
@@ -550,7 +550,7 @@ body > .audio {
   top: 367px;
   left: 48px;
   background-size: contain;
-  background-image: url(../img/scene06/youhui.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene06/youhui.png');
 }
 .scene06 .words {
   position: absolute;
@@ -569,7 +569,7 @@ body > .audio {
   top: 828px;
   left: 180px;
   background-size: contain;
-  background-image: url(../img/scene06/button.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene06/button.png');
 }
 .replay {
   display: none;
@@ -580,7 +580,7 @@ body > .audio {
   position: absolute;
   top: 128px;
   left: 63px;
-  background-image: url(../img/replay/xianqige.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/replay/xianqige.png');
   background-repeat: no-repeat;
   background-size: contain;
   display: none;
@@ -591,7 +591,7 @@ body > .audio {
   position: absolute;
   top: 102px;
   left: 100px;
-  background-image: url(../img/replay/mengxiaomei.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/replay/mengxiaomei.png');
   background-repeat: no-repeat;
   background-size: contain;
   display: none;
@@ -602,7 +602,7 @@ body > .audio {
   position: absolute;
   top: 375px;
   left: 24px;
-  background-image: url(../img/scene01/info-bg.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene01/info-bg.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -612,7 +612,7 @@ body > .audio {
   position: absolute;
   top: 427px;
   left: 90px;
-  background-image: url(../img/replay/words.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/replay/words.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -622,7 +622,7 @@ body > .audio {
   position: absolute;
   top: 510px;
   left: 35px;
-  background-image: url(../img/scene04/audio-sound.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/audio-sound.png');
   background-repeat: no-repeat;
   transform-origin: 0px 0px 0px;
 }
@@ -632,7 +632,7 @@ body > .audio {
   position: absolute;
   top: 517px;
   left: 260px;
-  background-image: url(../img/scene04/play.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/play.png');
   background-repeat: no-repeat;
   background-size: cover;
   transform-origin: center;
@@ -644,7 +644,7 @@ body > .audio {
   position: absolute;
   top: 187px;
   left: 260px;
-  background-image: url(../img/scene04/pause.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/scene04/pause.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -668,7 +668,7 @@ body > .audio {
   position: absolute;
   top: 828px;
   left: 180px;
-  background-image: url(../img/replay/button.png);
+  background-image: url('http://yanzhong16.oss-cn-shanghai.aliyuncs.com/img/replay/button.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
